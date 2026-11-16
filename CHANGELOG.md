@@ -6,6 +6,18 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le pr
 
 <!-- releases -->
 
+## [0.2.0](https://github.com/superT0f/desarrimage/tree/v0.2.0) — 2026-11-16
+
+### 🚀 Ajouté
+
+- publier un guide comparatif Google Drive ([9d71a64](https://github.com/superT0f/desarrimage/commit/9d71a64a5229de89e8ff62661d4dbbd7b6e4ce9e))
+
+### 📚 Documentation
+
+- documenter la collaboration humain-IA ([916a8bc](https://github.com/superT0f/desarrimage/commit/916a8bca975e8c76d642952f88b354d89edc3e4f))
+
+
+
 ## [0.1.0](https://github.com/superT0f/desarrimage/tree/v0.1.0) — 2026-11-16
 
 ### 🚀 Ajouté
