@@ -2,7 +2,7 @@
     "name": "desarrimage/api",
     "description": "API publique du catalogue Désarrimage",
     "type": "project",
-    "license": "MIT",
+    "license": "AGPL-3.0-or-later",
     "require": {
         "php": "^8.2",
         "slim/slim": "^4.14",

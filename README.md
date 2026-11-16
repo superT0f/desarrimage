@@ -53,8 +53,12 @@ Consultez le guide de contribution pour le format attendu.
 
 ## Licences
 
-- Code : MIT, voir `LICENSE`.
-- Contenu du catalogue : CC BY-SA 4.0, voir `data/LICENSE`.
-- Logo et illustrations : CC BY-SA 4.0.
+- Code : **AGPL-3.0-or-later**, voir `LICENSE`.
+- Contenu du catalogue : **CC BY-SA 4.0**, voir `data/LICENSE`.
+- Logo et illustrations : **CC BY-SA 4.0**.
+
+Le code peut être utilisé, modifié et partagé, y compris commercialement. Toute version modifiée distribuée ou proposée comme service réseau doit conserver ces libertés et offrir son code source correspondant sous la même licence. Les contenus adaptés doivent également rester sous CC BY-SA 4.0, avec attribution.
+
+Copyright (c) 2026 Désarrimage contributors.
 
 Désarrimage est un projet indépendant. Les marques citées appartiennent à leurs propriétaires respectifs.
