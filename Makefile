@@ -66,7 +66,8 @@ push-api: mnt-gandi
 		--exclude='.env.example' \
 		--exclude='*.log' \
 		api/ "$(VHOST_DIR)/api/"
-	@echo 'API déployée ; le fichier api/.env de production est conservé.'
+	rsync $(RSYNC_OPTS) --delete data/ "$(VHOST_DIR)/data/"
+	@echo 'API et données déployées ; le fichier api/.env de production est conservé.'
 
 push-front: build mnt-gandi
 	rsync $(RSYNC_OPTS) client/dist/assets/ "$(VHOST_DIR)/assets/"
