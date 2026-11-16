@@ -6,6 +6,14 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le pr
 
 <!-- releases -->
 
+## [0.3.0](https://github.com/superT0f/desarrimage/tree/v0.3.0) — 2026-11-16
+
+### 🚀 Ajouté
+
+- documenter l’API avec Swagger ([925b081](https://github.com/superT0f/desarrimage/commit/925b081a5eead1c075292f108a3fdb9a2bd4a0de))
+
+
+
 ## [0.2.0](https://github.com/superT0f/desarrimage/tree/v0.2.0) — 2026-11-16
 
 ### 🚀 Ajouté
