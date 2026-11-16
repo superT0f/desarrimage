@@ -138,12 +138,12 @@ push-api: mnt-gandi
 push-front: build mnt-gandi
 	rsync $(RSYNC_OPTS) client/dist/assets/ "$(VHOST_DIR)/assets/"
 	rsync $(RSYNC_OPTS) --delete \
-		--exclude='assets/' \
-		--exclude='api/' \
-		--exclude='data/' \
+		--exclude='/assets/' \
+		--exclude='/api/' \
+		--exclude='/data/' \
 		--exclude='.env' \
 		--exclude='.htaccess' \
-		--exclude='index.html' \
+		--exclude='/index.html' \
 		client/dist/ "$(VHOST_DIR)/"
 	rsync $(RSYNC_OPTS) .htaccess "$(VHOST_DIR)/.htaccess"
 	rsync $(RSYNC_OPTS) client/dist/index.html "$(VHOST_DIR)/index.html"
