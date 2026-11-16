@@ -6,6 +6,18 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le pr
 
 <!-- releases -->
 
+## [0.4.2](https://github.com/superT0f/desarrimage/tree/v0.4.2) — 2026-11-16
+
+### 🐛 Corrigé
+
+- packager la spec OpenAPI dans Docker ([07a381e](https://github.com/superT0f/desarrimage/commit/07a381e9667272d3e52115093ef1dac5c4e4ecb5))
+
+### 📚 Documentation
+
+- préparer les notes de version 0.4.2 ([cbbc833](https://github.com/superT0f/desarrimage/commit/cbbc8336eca59d56b4403f402b8daa2c193fb874))
+
+
+
 ## [0.3.0](https://github.com/superT0f/desarrimage/tree/v0.3.0) — 2026-11-16
 
 ### 🚀 Ajouté
