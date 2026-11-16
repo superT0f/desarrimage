@@ -9,6 +9,7 @@ const endpoints = [
   ['/stats', 'stats'],
   ['/categories', 'categories'],
   ['/products?region=other', 'products.json'],
+  ['/products?region=other', 'products/index.json'],
   ['/guides', 'guides/index'],
 ]
 const guideFiles = readdirSync(resolve(clientRoot, '../data/guides')).filter((file) => file.endsWith('.json'))
