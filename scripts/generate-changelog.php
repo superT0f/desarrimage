@@ -42,6 +42,9 @@ $breaking = [];
 
 foreach (array_filter(explode("\n", trim($log))) as $line) {
     [$hash, $shortHash, $subject] = array_pad(explode("\x1f", $line), 3, '');
+    if (preg_match('/^docs(?:\([^)]+\))?: .*changelog/i', $subject) === 1) {
+        continue;
+    }
     $type = 'other';
     $scope = null;
     $description = $subject;
