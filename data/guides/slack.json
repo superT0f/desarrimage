@@ -1,0 +1,305 @@
+{
+  "slug": "quitter-slack",
+  "source": "slack",
+  "title": "Quitter Slack : Twake ou Element ?",
+  "summary": "Une PME de 10 personnes veut quitter Slack sans perdre ses fichiers ni croire à une importation magique. Comparons deux trajectoires européennes, le coût d’une nouvelle messagerie et ce qu’il reste à reconstruire.",
+  "users": 10,
+  "data_gb": 25,
+  "shared_drives": 0,
+  "native_documents_percentage": 20,
+  "window_days": 10,
+  "day_rate_cents": 40000,
+  "currency": "EUR",
+  "tax_label": "HT / à confirmer",
+  "status": "published",
+  "verified_at": null,
+  "updated_at": "2026-11-16",
+  "verification_status": "documented",
+  "tested_by": null,
+  "tested_at": null,
+  "evidence_url": null,
+  "reviewed_by": null,
+  "price_checked_at": "2026-11-16",
+  "comparison": [
+    {
+      "criterion": "Modèle d’hébergement",
+      "values": {
+        "twake": "Cloud managé, cloud privé ou on-premise. LINAGORA annonce un hébergement dans l’UE, mais les sous-traitants et la localisation précise doivent être vérifiés pour l’offre retenue.",
+        "element": "Auto-hébergement, cloud privé ou déploiement isolé/air-gapped. PostgreSQL externe, DNS, TLS, médias et sauvegardes sont à administrer."
+      }
+    },
+    {
+      "criterion": "Offre retenue pour 10 personnes",
+      "values": {
+        "twake": "Twake Workplace Standard à 9 €/utilisateur/mois : Mail, Drive, Chat, Calendar, espaces d’équipe et administration standard.",
+        "element": "Enterprise est sur devis et sa grille commence à 100 utilisateurs. Community est gratuit mais explicitement destiné aux usages non professionnels et aux évaluations."
+      }
+    },
+    {
+      "criterion": "Export Slack disponible",
+      "values": {
+        "twake": "Même départ pour tous : messages JSON et URL de fichiers selon l’offre Slack. Les Business+ peuvent demander un export élargi, soumis à approbation et non garanti.",
+        "element": "L’export standard ne contient pas les binaires des pièces jointes. Il faut les télécharger avant de fermer Slack, notamment pour les canaux privés et Slack Connect."
+      }
+    },
+    {
+      "criterion": "Import de l’historique Slack",
+      "values": {
+        "twake": "Aucun importeur de ZIP Slack documenté. L’import SCIM crée les utilisateurs en masse mais ne reprend ni canaux, messages, fils, réactions ni fichiers.",
+        "element": "Le Slack bridge n’est plus disponible à l’achat et son dépôt est archivé. Aucun importeur Slack actuel n’est documenté. Un pont ne serait de toute façon pas un import d’historique."
+      }
+    },
+    {
+      "criterion": "Comptes, canaux et permissions",
+      "values": {
+        "twake": "Création des utilisateurs par SCIM possible en auto-hébergement. Espaces, canaux, appartenances et droits sont à reconstruire.",
+        "element": "Salons, espaces, utilisateurs et ACL sont à recréer. Conserver le même domaine Matrix facilite la reconnexion, mais pas la reprise de l’historique Slack."
+      }
+    },
+    {
+      "criterion": "Chiffrement et récupération",
+      "values": {
+        "twake": "Twake Chat prend en charge le chiffrement de bout en bout et la vérification croisée. La perte des clés peut rendre les conversations irrécupérables.",
+        "element": "Chiffrement de bout en bout par défaut. Les messages et médias chiffrés ne sont pas lisibles depuis un export sans les clés des utilisateurs."
+      }
+    },
+    {
+      "criterion": "Interopérabilité",
+      "values": {
+        "twake": "Twake Chat est un client Matrix open source compatible avec les autres clients Matrix. Cette compatibilité ne rend pas les bases ou exports Slack interchangeables.",
+        "element": "Protocole Matrix ouvert et fédération contrôlable. Le choix est pertinent pour une stratégie de long terme, pas une garantie de migration immédiate."
+      }
+    },
+    {
+      "criterion": "Exploitation",
+      "values": {
+        "twake": "Le cloud évite l’administration de la stack. En on-premise, le déploiement Docker documenté est conséquent : services multiples, environ 8 Go de RAM et 20 Go de disque minimum.",
+        "element": "La charge est élevée : mises à jour, PostgreSQL, Kubernetes selon le déploiement, médias, sauvegardes et tests de restauration."
+      }
+    },
+    {
+      "criterion": "Ce que le prix ne couvre pas",
+      "values": {
+        "twake": "Import Slack, reprise des intégrations/bots, historique des messages, TVA et SLA de Standard à confirmer.",
+        "element": "Licence Enterprise, hébergement, support et développement d’un importeur sont sur devis ou à construire. Le zéro euro de Community n’est pas un prix de production PME."
+      }
+    }
+  ],
+  "costs": {
+    "twake": {
+      "recurring_monthly_cents": 9000,
+      "recurring_label": "Twake Workplace Standard : 10 × 9 €/utilisateur/mois = 90 €/mois, soit 1 080 € sur 12 mois. La page ne précise pas clairement HT/TTC.",
+      "migration_days": 5.0,
+      "annual_operation_days": 3.0,
+      "notes": "Cinq jours pour exporter, créer les comptes et canaux, récupérer les fichiers essentiels, tester et former. Le développement d’un importeur et les intégrations spécifiques sont exclus."
+    },
+    "element": {
+      "recurring_monthly_cents": 0,
+      "recurring_label": "Prix public professionnel non déterminé : Enterprise est sur devis et la grille commence à 100 utilisateurs. Hébergement et support ne sont pas inclus dans ce calcul.",
+      "migration_days": 8.0,
+      "annual_operation_days": 12.0,
+      "notes": "Huit jours pour installer, sécuriser et configurer Matrix, PostgreSQL, DNS/TLS et sauvegardes, puis recréer les usages. Le total est de la charge interne, pas un budget complet."
+    }
+  },
+  "assumptions": [
+    "Scénario : 10 utilisateurs, 25 Go de messages et pièces jointes, canaux publics et privés, intégrations limitées à quelques webhooks.",
+    "Valorisation interne : 400 € HT/JH. Le développement d’un adaptateur Slack complet est exclu faute de périmètre mesuré.",
+    "Le scénario budgète une nouvelle messagerie avec conservation d’une archive Slack, pas une reprise fidèle de l’historique dans les conversations.",
+    "Un mois Slack Business+ n’est pas ajouté : l’export élargi nécessite une approbation et n’est pas garanti.",
+    "Twake Standard coûte 90 €/mois sur la base publique du 16/11/2026 ; la TVA reste à confirmer.",
+    "Element Community n’est pas retenu pour une production professionnelle. Le coût Enterprise et l’hébergement doivent être obtenus sur devis.",
+    "Les exports Slack contiennent surtout des URL de fichiers : télécharger les binaires avant toute suppression ou fermeture de l’espace.",
+    "Les charges de migration et d’exploitation sont des estimations éditoriales, pas des mesures de migrations réalisées."
+  ],
+  "risks": [
+    {
+      "target": null,
+      "title": "Perte de pièces jointes liées à un export incomplet",
+      "probability": "elevee",
+      "impact": "eleve",
+      "mitigation": "Télécharger les fichiers avant fermeture, vérifier les liens par échantillon et conserver une copie indépendante de l’archive et de son inventaire."
+    },
+    {
+      "target": null,
+      "title": "Historique non reconstitué dans la nouvelle messagerie",
+      "probability": "elevee",
+      "impact": "eleve",
+      "mitigation": "Annoncer clairement le niveau de reprise : archive consultable ou réinjection prototypée. Ne pas promettre fils, réactions, auteurs et dates sans recette dédiée."
+    },
+    {
+      "target": null,
+      "title": "Export Slack privé refusé ou limité",
+      "probability": "moyenne",
+      "impact": "eleve",
+      "mitigation": "Demander l’export tôt, documenter la justification et prévoir un plan B avec archive standard et récupération manuelle des contenus critiques."
+    },
+    {
+      "target": "element",
+      "title": "Offre Community utilisée à tort en production",
+      "probability": "moyenne",
+      "impact": "eleve",
+      "mitigation": "Faire confirmer le modèle commercial par Element avant le pilote. Ne pas présenter la licence gratuite comme un coût professionnel nul."
+    },
+    {
+      "target": "element",
+      "title": "Clés de chiffrement ou sauvegardes inutilisables",
+      "probability": "moyenne",
+      "impact": "eleve",
+      "mitigation": "Tester une restauration réelle, documenter la récupération des clés et conserver le même domaine Matrix lorsque c’est possible."
+    },
+    {
+      "target": "twake",
+      "title": "Confusion entre import SCIM et migration Slack",
+      "probability": "moyenne",
+      "impact": "moyen",
+      "mitigation": "Expliquer que SCIM ne crée que les comptes. Préparer séparément canaux, droits, messages, fichiers et intégrations."
+    },
+    {
+      "target": null,
+      "title": "Bots et intégrations interrompus",
+      "probability": "moyenne",
+      "impact": "moyen",
+      "mitigation": "Inventorier webhooks et applications, choisir les intégrations indispensables et tester chaque flux avant de désactiver Slack."
+    }
+  ],
+  "timeline": [
+    {
+      "phase": "Inventaire",
+      "start_day": 1,
+      "duration_days": 1,
+      "description": "Canaux, membres, fichiers, rétention et intégrations."
+    },
+    {
+      "phase": "Export",
+      "start_day": 2,
+      "duration_days": 2,
+      "description": "Archive Slack, binaires et demande d’export élargi si nécessaire."
+    },
+    {
+      "phase": "Préparation",
+      "start_day": 4,
+      "duration_days": 2,
+      "description": "Comptes, hébergement, domaine, clés et sauvegardes."
+    },
+    {
+      "phase": "Pilote",
+      "start_day": 6,
+      "duration_days": 2,
+      "description": "Canaux tests, permissions, fichiers et récupération."
+    },
+    {
+      "phase": "Bascule",
+      "start_day": 8,
+      "duration_days": 2,
+      "description": "Formation, webhooks, export final et lecture seule Slack."
+    },
+    {
+      "phase": "Conservation",
+      "start_day": 10,
+      "duration_days": 1,
+      "description": "Vérification de l’archive et décision de réinjection éventuelle."
+    }
+  ],
+  "decisions": {
+    "twake": "Pour une petite équipe qui veut une suite européenne managée et un prix public immédiat, en acceptant de repartir sur des canaux neufs avec une archive Slack.",
+    "element": "Pour une organisation qui privilégie Matrix, la fédération et l’auto-hébergement, avec un budget Enterprise/infrastructure à faire chiffrer et de vraies compétences d’exploitation."
+  },
+  "sources": [
+    {
+      "target": null,
+      "kind": "migration",
+      "label": "Slack — Exporter les données de l’espace de travail",
+      "url": "https://slack.com/help/articles/201658943-Export-your-workspace-data"
+    },
+    {
+      "target": null,
+      "kind": "migration",
+      "label": "Slack — Guide des outils d’import et d’export",
+      "url": "https://slack.com/help/articles/204897248-Guide-to-Slack-import-and-export-tools"
+    },
+    {
+      "target": null,
+      "kind": "documentation",
+      "label": "Slack — Lire les exports de données",
+      "url": "https://slack.com/help/articles/220556107-How-to-read-Slack-data-exports"
+    },
+    {
+      "target": null,
+      "kind": "documentation",
+      "label": "Slack — Personnaliser la conservation des données",
+      "url": "https://slack.com/help/articles/203457187-Customize-data-retention-in-Slack"
+    },
+    {
+      "target": null,
+      "kind": "pricing",
+      "label": "Slack — Tarifs publics des offres",
+      "url": "https://slack.com/intl/fr-fr/pricing"
+    },
+    {
+      "target": "twake",
+      "kind": "pricing",
+      "label": "Twake — Workplace Pro pour organisations",
+      "url": "https://twake.app/twake-pro/"
+    },
+    {
+      "target": "twake",
+      "kind": "migration",
+      "label": "Twake — Import des utilisateurs avec SCIM",
+      "url": "https://github.com/linagora/twake-workplace-docker/blob/main/docs/scim-import.md"
+    },
+    {
+      "target": "twake",
+      "kind": "documentation",
+      "label": "Twake Chat — Client Matrix open source",
+      "url": "https://github.com/linagora/twake-on-matrix"
+    },
+    {
+      "target": "twake",
+      "kind": "documentation",
+      "label": "Twake Workplace — Hébergement et offres LINAGORA",
+      "url": "https://linagora.com/en/twake-workplace"
+    },
+    {
+      "target": "twake",
+      "kind": "security",
+      "label": "Twake — Politique de confidentialité et clés de chiffrement",
+      "url": "https://twake.app/en/privacy/"
+    },
+    {
+      "target": "twake",
+      "kind": "documentation",
+      "label": "Twake Workplace — Déploiement Docker on-premise",
+      "url": "https://github.com/linagora/twake-workplace-docker"
+    },
+    {
+      "target": "element",
+      "kind": "pricing",
+      "label": "Element — Offres Community, Enterprise et Sovereign",
+      "url": "https://element.io/pricing"
+    },
+    {
+      "target": "element",
+      "kind": "migration",
+      "label": "Element — Slack Bridge indisponible à l’achat",
+      "url": "https://docs.element.io/latest/element-cloud-documentation/integrations/slack-bridge/"
+    },
+    {
+      "target": "element",
+      "kind": "documentation",
+      "label": "Matrix — Dépôt archivé du pont Slack",
+      "url": "https://github.com/matrix-org/matrix-appservice-slack"
+    },
+    {
+      "target": "element",
+      "kind": "migration",
+      "label": "Element — Migrer EMS vers l’auto-hébergement",
+      "url": "https://docs.element.io/latest/element-cloud-documentation/element-matrix-services/migrate-from-ems-to-self-hosted/"
+    },
+    {
+      "target": "element",
+      "kind": "migration",
+      "label": "Element — Migration ESS Classic vers ESS Pro",
+      "url": "https://docs.element.io/latest/element-server-suite-pro/migration/ess-classic-to-ess-pro/migration-from-classic/"
+    }
+  ]
+}

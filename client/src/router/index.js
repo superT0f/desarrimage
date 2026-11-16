@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import { setSeo } from '../services/seo'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -13,6 +14,11 @@ const router = createRouter({
       path: '/catalogue',
       name: 'catalog',
       component: () => import('../views/CatalogView.vue'),
+    },
+    {
+      path: '/produit/:slug/imprimer',
+      name: 'print-guide',
+      component: () => import('../views/PrintGuideView.vue'),
     },
     {
       path: '/produit/:slug',
@@ -42,9 +48,14 @@ router.afterEach((to) => {
     home: 'Désarrimage — Changez de cap, pas d’habitudes',
     catalog: 'Explorer le catalogue — Désarrimage',
     contribute: 'Contribuer — Désarrimage',
+    'print-guide': 'Guide Google Drive à imprimer — Désarrimage',
     'not-found': 'Page introuvable — Désarrimage',
   }
-  document.title = titles[to.name] || 'Fiche de migration — Désarrimage'
+  setSeo({
+    title: titles[to.name] || 'Fiche de migration — Désarrimage',
+    description: to.meta.description,
+    path: to.fullPath,
+  })
 })
 
 export default router

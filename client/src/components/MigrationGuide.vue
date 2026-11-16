@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import CountryFlag from './CountryFlag.vue'
+import SharePack from './SharePack.vue'
 
 const props = defineProps({
   guide: { type: Object, required: true },
@@ -20,6 +21,7 @@ const timelineStyle = (phase) => ({
   width: `${(phase.duration_days / props.guide.scenario.window_days) * 100}%`,
 })
 const riskLabels = { faible: 'Faible', modere: 'Modéré', eleve: 'Élevé' }
+const verificationLabels = { draft: 'Brouillon', documented: 'Documenté', tested: 'Testé sur le terrain', verified: 'Vérifié indépendamment' }
 const kindLabels = { documentation: 'Documentation', pricing: 'Tarifs', migration: 'Migration', security: 'Sécurité' }
 const commonSources = computed(() => props.guide.sources.filter((source) => !source.target))
 const targetSources = (slug) => props.guide.sources.filter((source) => source.target?.slug === slug)
@@ -35,10 +37,12 @@ const targetSources = (slug) => props.guide.sources.filter((source) => source.ta
       </div>
       <div class="guide-update">
         <span class="status-dot"></span>
-        <strong>Guide éditorial</strong>
-        <small>Mis à jour le {{ guide.updated_at }} · scénario chiffré, pas un devis</small>
+        <strong>{{ verificationLabels[guide.verification.status] }}</strong>
+        <small>Prix vérifiés le {{ guide.verification.price_checked_at }} · scénario chiffré, pas un devis</small>
       </div>
     </header>
+
+    <SharePack :guide="guide" />
 
     <div class="scenario-grid" aria-label="Hypothèses du scénario">
       <div><strong>{{ guide.scenario.users }}</strong><span>utilisateurs</span></div>
@@ -147,7 +151,7 @@ const targetSources = (slug) => props.guide.sources.filter((source) => source.ta
         <h2>Une traversée de {{ guide.scenario.window_days }} jours, sans Big Bang</h2>
       </div>
       <div class="timeline-chart">
-        <div class="timeline-ruler" aria-hidden="true">
+        <div class="timeline-ruler" aria-hidden="true" :style="{ '--timeline-days': guide.scenario.window_days }">
           <span v-for="day in guide.scenario.window_days" :key="day">J{{ day }}</span>
         </div>
         <div v-for="phase in guide.timeline" :key="phase.position" class="timeline-row">
@@ -266,7 +270,7 @@ const targetSources = (slug) => props.guide.sources.filter((source) => source.ta
 .assumptions-card { margin-top: 20px; padding: 23px; border: 1px solid #426164; }
 .assumptions-card h3 { font-size: .85rem; }
 .assumptions-card ul { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 30px; margin: 0; padding-left: 18px; color: #b8cac6; font-size: .67rem; }
-.timeline-ruler { display: grid; grid-template-columns: repeat(10, 1fr); margin-left: 240px; color: var(--muted); font-size: .58rem; text-align: center; }
+.timeline-ruler { display: grid; grid-template-columns: repeat(var(--timeline-days), 1fr); margin-left: 240px; color: var(--muted); font-size: .58rem; text-align: center; }
 .timeline-row { display: grid; grid-template-columns: 220px 1fr; align-items: center; gap: 20px; margin-top: 17px; }
 .timeline-label { display: flex; flex-direction: column; }
 .timeline-label strong { font-size: .76rem; }

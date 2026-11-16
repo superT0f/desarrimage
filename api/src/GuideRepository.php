@@ -60,6 +60,14 @@ final class GuideRepository
             'summary' => $row['summary'],
             'updated_at' => $row['updated_at'],
             'verified_at' => $row['verified_at'],
+            'verification' => [
+                'status' => $row['verification_status'],
+                'tested_by' => $row['tested_by'],
+                'tested_at' => $row['tested_at'],
+                'evidence_url' => $row['evidence_url'],
+                'reviewed_by' => $row['reviewed_by'],
+                'price_checked_at' => $row['price_checked_at'],
+            ],
             'source' => [
                 'slug' => $row['source_slug'],
                 'name' => $row['source_name'],

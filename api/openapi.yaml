@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Désarrimage — API publique
-  version: 0.5.0
+  version: 0.6.0
   description: |
     API ouverte en lecture seule des alternatives numériques françaises et européennes et de leurs guides de migration.
 
@@ -439,6 +439,8 @@ components:
               nullable: true
             scenario:
               $ref: '#/components/schemas/Scenario'
+            verification:
+              $ref: '#/components/schemas/Verification'
             comparison:
               type: array
               items:
@@ -467,6 +469,30 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Source'
+    Verification:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [draft, documented, tested, verified]
+        tested_by:
+          type: string
+          nullable: true
+        tested_at:
+          type: string
+          format: date
+          nullable: true
+        evidence_url:
+          type: string
+          format: uri
+          nullable: true
+        reviewed_by:
+          type: string
+          nullable: true
+        price_checked_at:
+          type: string
+          format: date
+          nullable: true
     ComparisonRow:
       type: object
       properties:

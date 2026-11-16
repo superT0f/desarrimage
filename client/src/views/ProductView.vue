@@ -2,6 +2,7 @@
 import { computed, nextTick, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { useCatalogStore } from '../stores/catalog'
+import { setSeo } from '../services/seo'
 import MigrationGuide from '../components/MigrationGuide.vue'
 import CountryFlag from '../components/CountryFlag.vue'
 
@@ -51,7 +52,22 @@ watch(
         product.value.guide = await catalog.fetchGuide(product.value.guide_slug)
       }
       selectedId.value = product.value.migrations[0]?.id || null
-      document.title = `${product.value.name} — Désarrimage`
+      setSeo({
+        title: `${product.value.name} — Désarrimage`,
+        description: product.value.description,
+        path: route.fullPath,
+        image: '/images/social-google-drive.png',
+        type: 'article',
+        schema: {
+          '@context': 'https://schema.org',
+          '@type': 'TechArticle',
+          headline: product.value.guide?.title || product.value.name,
+          description: product.value.description,
+          dateModified: product.value.guide?.updated_at,
+          inLanguage: 'fr-FR',
+          author: { '@type': 'Organization', name: 'Désarrimage' },
+        },
+      })
       await nextTick()
       if (route.hash) {
         document.querySelector(route.hash)?.scrollIntoView({ block: 'start' })

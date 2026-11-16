@@ -20,7 +20,9 @@ Les guides riches vivent dans `data/guides/<source>.json`, séparément du catal
 
 Chaque ligne de `comparison` contient un critère et une valeur par produit cible. Modifiez uniquement la cellule concernée dans votre PR. Les coûts utilisent des centimes d’euros et des jours-homme ; l’API calcule les coûts de migration, d’exploitation et de première année. N’inscrivez donc pas de total calculé à la main.
 
-Les estimations doivent indiquer leur date, leurs hypothèses et leurs sources. Elles ne sont jamais présentées comme un devis. `verified_at` reste `null` tant que le scénario n’a pas été réellement testé. `make check` valide la structure et les produits référencés ; l’import Docker peuple ensuite les tables normalisées et expose le guide sur `/api/guides/<slug>`.
+Les estimations doivent indiquer leur date, leurs hypothèses et leurs sources. Elles ne sont jamais présentées comme un devis. `verified_at` reste `null` tant que le scénario n’a pas été réellement testé.
+
+Les niveaux `draft`, `documented`, `tested`, `verified` et les règles de contre-revue sont définis dans [`docs/gouvernance.md`](docs/gouvernance.md). Une fiche documentée n’est pas une fiche testée sur le terrain. `make check` valide la structure et les produits référencés ; l’import Docker peuple ensuite les tables normalisées et expose le guide sur `/api/guides/<slug>`.
 
 ## Critères éditoriaux
 

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Guide de contribution
+    url: https://github.com/superT0f/desarrimage/blob/main/CONTRIBUTING.md
+    about: Format des fiches, coûts, preuves et conventions
+  - name: Gouvernance et conflits d’intérêts
+    url: https://github.com/superT0f/desarrimage/blob/main/docs/gouvernance.md
+    about: Rôles, indépendance et niveaux de vérification

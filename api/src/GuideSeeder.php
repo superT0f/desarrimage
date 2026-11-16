@@ -19,17 +19,22 @@ final class GuideSeeder
             'INSERT INTO migration_guides
                 (source_product_id, slug, title, summary, users, data_gb, shared_drives,
                 native_documents_percentage, window_days, day_rate_cents, currency, tax_label,
-                status, verified_at, updated_at)
+                status, verified_at, updated_at, verification_status, tested_by, tested_at,
+                evidence_url, reviewed_by, price_checked_at)
             VALUES
                 (:source, :slug, :title, :summary, :users, :data_gb, :shared_drives,
                 :native_documents_percentage, :window_days, :day_rate_cents, :currency, :tax_label,
-                :status, :verified_at, :updated_at)
+                :status, :verified_at, :updated_at, :verification_status, :tested_by, :tested_at,
+                :evidence_url, :reviewed_by, :price_checked_at)
             ON DUPLICATE KEY UPDATE title = VALUES(title), summary = VALUES(summary),
                 users = VALUES(users), data_gb = VALUES(data_gb), shared_drives = VALUES(shared_drives),
                 native_documents_percentage = VALUES(native_documents_percentage),
                 window_days = VALUES(window_days), day_rate_cents = VALUES(day_rate_cents),
                 currency = VALUES(currency), tax_label = VALUES(tax_label), status = VALUES(status),
-                verified_at = VALUES(verified_at), updated_at = VALUES(updated_at)'
+                verified_at = VALUES(verified_at), updated_at = VALUES(updated_at),
+                verification_status = VALUES(verification_status), tested_by = VALUES(tested_by),
+                tested_at = VALUES(tested_at), evidence_url = VALUES(evidence_url),
+                reviewed_by = VALUES(reviewed_by), price_checked_at = VALUES(price_checked_at)'
         );
         $statement->execute([
             'source' => $this->productId($guide['source'], $productIds),
@@ -47,6 +52,12 @@ final class GuideSeeder
             'status' => $guide['status'],
             'verified_at' => $guide['verified_at'],
             'updated_at' => $guide['updated_at'],
+            'verification_status' => $guide['verification_status'],
+            'tested_by' => $guide['tested_by'],
+            'tested_at' => $guide['tested_at'],
+            'evidence_url' => $guide['evidence_url'],
+            'reviewed_by' => $guide['reviewed_by'],
+            'price_checked_at' => $guide['price_checked_at'],
         ]);
 
         $findGuide = $this->database->prepare('SELECT id FROM migration_guides WHERE slug = :slug');

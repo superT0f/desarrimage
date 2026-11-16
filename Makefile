@@ -9,7 +9,7 @@ export APP_VERSION
 export VITE_APP_VERSION := $(APP_VERSION)
 
 .PHONY: help install dev dev-detached dev-down dev-logs dev-ps dev-client dev-api \
-	compose-bootstrap docker-check check audit build version changelog release clean mnt-gandi \
+	compose-bootstrap docker-check check audit build mirror version changelog release clean mnt-gandi \
 	db-migrate db-seed snapshot deploy push-front push-api push deploy-dry status verify verify-api
 
 help:
@@ -93,6 +93,9 @@ audit:
 	npx --yes lighthouse 'http://127.0.0.1:5173/?theme=dark' --only-categories=accessibility,best-practices,seo --output=json --output-path=.tmp/lighthouse-dark.json --quiet --chrome-flags='--headless --no-sandbox --disable-gpu'
 	node scripts/lighthouse-summary.mjs .tmp/lighthouse-light.json .tmp/lighthouse-dark.json
 
+mirror:
+	cd client && node scripts/sync-api-mirror.mjs
+
 snapshot:
 	php api/scripts/export-snapshot.php
 
@@ -111,7 +114,7 @@ release:
 	@echo 'Version préparée. Vérifie, committe, puis crée le tag v$(VERSION).'
 
 build: snapshot
-	cd client && npm run build
+	cd client && VITE_API_BASE_URL=/mirror/api npm run build
 
 db-migrate:
 	cd api && vendor/bin/phinx migrate

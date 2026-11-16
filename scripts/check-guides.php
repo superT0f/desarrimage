@@ -13,7 +13,8 @@ foreach ($catalog['migrations'] as $migration) {
 $required = [
     'slug', 'source', 'title', 'summary', 'users', 'data_gb', 'shared_drives',
     'native_documents_percentage', 'window_days', 'day_rate_cents', 'currency',
-    'tax_label', 'status', 'verified_at', 'updated_at', 'comparison', 'costs',
+    'tax_label', 'status', 'verified_at', 'updated_at', 'verification_status',
+    'tested_by', 'tested_at', 'evidence_url', 'reviewed_by', 'price_checked_at', 'comparison', 'costs',
     'assumptions', 'risks', 'timeline', 'decisions', 'sources',
 ];
 $slugs = [];
@@ -36,6 +37,9 @@ foreach (glob($root . '/data/guides/*.json') ?: [] as $file) {
     }
     if (!in_array($guide['status'], ['draft', 'published'], true)) {
         throw new RuntimeException("{$file} : statut invalide");
+    }
+    if (!in_array($guide['verification_status'], ['draft', 'documented', 'tested', 'verified'], true)) {
+        throw new RuntimeException("{$file} : niveau de vérification invalide");
     }
     if ($guide['currency'] !== 'EUR' || $guide['day_rate_cents'] <= 0 || $guide['window_days'] <= 0) {
         throw new RuntimeException("{$file} : scénario financier invalide");

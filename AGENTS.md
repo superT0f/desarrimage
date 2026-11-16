@@ -40,6 +40,9 @@ Règles d’honnêteté :
 - `Dockerfile` : targets `api` et `client`, images qualifiées avec `docker.io/library/...` pour rester compatibles Podman.
 - `compose.yaml` : front, API et MariaDB avec volumes persistants.
 - `api/openapi.yaml` : contrat public de l’API, servi sur `/api/openapi.yaml` et affiché par `/swagger.html` via Swagger UI auto-hébergé.
+- `client/public/mirror/api/` : miroir JSON généré avec `make mirror`, utilisé par `make build` pour pré-rendre sans MySQL. Ne pas le modifier à la main.
+- `client/scripts/prerender.mjs` : pré-rendu Playwright des routes avec OpenGraph, canonical et JSON-LD.
+- `client/src/components/SharePack.vue` : exports JSON, PNG et liens d’impression A4. Les données et images sont générées sans compte ni tracking.
 - `Makefile` : développement, contrôles, releases et déploiement Gandi.
 - `scripts/` : synchronisation SemVer et génération du changelog.
 - `docs/releases/` : notes techniques et marketing par version ; `docs/images/` contient leurs captures réelles.
@@ -100,8 +103,9 @@ Les modifications éditoriales se font dans `data/catalog.json` et `data/guides/
 - Sourcer les affirmations et distinguer France, Europe et extra-européen.
 - Une solution open source extra-européenne n’est pas automatiquement une alternative européenne.
 - Laisser `verified_at: null` tant que le scénario n’a pas été réellement vérifié et documenté.
-- Régénérer l’instantané avec `make snapshot` après une modification du catalogue.
-- Vérifier l’import avec `make db-seed` ou le démarrage Docker.
+- Régénérer l’instantané avec `make snapshot` et le miroir avec `make mirror` après une modification du catalogue ou d’un guide.
+- Vérifier l’import avec `make db-seed` ou le démarrage Docker, puis tester aussi `make build` et les téléchargements du Share Pack.
+- Respecter les niveaux de preuve de `docs/gouvernance.md` : `draft`, `documented`, `tested`, `verified`.
 - Ne pas utiliser les logos ou marques citées comme s’ils étaient ceux du projet.
 
 ## 🧑‍💻 Conventions de code

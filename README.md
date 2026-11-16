@@ -65,6 +65,28 @@ Le projet est indépendant, sans publicité et sans classement sponsorisé. Moin
 - une API publique en lecture seule et son Swagger auto-hébergé ;
 - une home qui reste utilisable grâce à un instantané du catalogue si l’API fait une sieste.
 
+## 📦 Nouveau en 0.6.0 — Migration Share Pack
+
+Les guides ne restent plus seulement sur le site : chacun peut exporter un **Share Pack** avec ses sources et hypothèses.
+
+- **JSON** fidèle à l’API publique ;
+- **carte PNG 1200×630** générée dans le navigateur ;
+- **document A4** à imprimer ou enregistrer en PDF ;
+- **pré-rendu statique** avec OpenGraph, canonical et JSON-LD ;
+- niveaux de preuve `draft`, `documented`, `tested`, `verified`.
+
+Quatre guides complets sont disponibles : **Google Drive, Slack, Gmail et Notion**. Ils couvrent 3 hébergements, coûts natifs convertis en euros, limites d’import et risques de reconstruction.
+
+Le miroir statique `client/public/mirror/api/` permet de builder et pré-rendre sans MySQL ni réseau :
+
+```bash
+make mirror   # Met à jour le miroir depuis l’API
+make build    # Construit le front et pré-rend les guides
+make audit    # Vérifie les deux thèmes avec Lighthouse
+```
+
+La gouvernance des preuves et des contributions est détaillée dans [`docs/gouvernance.md`](docs/gouvernance.md) et l’[ADR 0001](docs/adr/0001-guides-normalises.md).
+
 ## 🚀 Nouveau en 0.4.2 — la réponse à la grande question
 
 La 0.4.2 apporte le premier guide comparatif complet **Google Drive → Nextcloud, kDrive et Twake Drive**, les coûts calculés, le registre des risques et une documentation OpenAPI publique. Parce que **42 est la réponse**, mais qu’un bon plan de migration reste quand même recommandé. ⚓

@@ -28,6 +28,8 @@ jobs:
       - name: Dépendances front
         working-directory: client
         run: npm ci --no-audit --no-fund
+      - name: Navigateur pour le pré-rendu
+        run: npx playwright install chromium
       - name: Contrôles et build
         run: make check
       - name: Configuration Compose
