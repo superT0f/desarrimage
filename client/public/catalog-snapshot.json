@@ -1,0 +1,100 @@
+{
+    "stats": {
+        "source_products": 6,
+        "alternatives": 14,
+        "migrations": 14,
+        "categories": 6
+    },
+    "products": [
+        {
+            "slug": "gmail",
+            "name": "Gmail",
+            "vendor": "Google",
+            "country_code": "US",
+            "country_name": "États-Unis",
+            "region": "other",
+            "description": "Messagerie grand public et professionnelle intégrée à Google Workspace.",
+            "website": "https://workspace.google.com/products/gmail/",
+            "pricing": "Gratuit avec publicité ; offres Workspace payantes",
+            "license_name": "Propriétaire",
+            "category_name": "Messagerie",
+            "category_slug": "messagerie",
+            "alternative_count": 2
+        },
+        {
+            "slug": "slack",
+            "name": "Slack",
+            "vendor": "Salesforce",
+            "country_code": "US",
+            "country_name": "États-Unis",
+            "region": "other",
+            "description": "Messagerie d’équipe organisée en canaux, avec un vaste catalogue d’intégrations.",
+            "website": "https://slack.com/",
+            "pricing": "Offre limitée gratuite ; abonnements payants",
+            "license_name": "Propriétaire",
+            "category_name": "Collaboration",
+            "category_slug": "collaboration",
+            "alternative_count": 2
+        },
+        {
+            "slug": "google-drive",
+            "name": "Google Drive",
+            "vendor": "Google",
+            "country_code": "US",
+            "country_name": "États-Unis",
+            "region": "other",
+            "description": "Stockage, synchronisation et coédition de fichiers dans l’écosystème Google.",
+            "website": "https://workspace.google.com/products/drive/",
+            "pricing": "Quota gratuit ; stockage supplémentaire payant",
+            "license_name": "Propriétaire",
+            "category_name": "Stockage & partage",
+            "category_slug": "stockage",
+            "alternative_count": 3
+        },
+        {
+            "slug": "notion",
+            "name": "Notion",
+            "vendor": "Notion Labs",
+            "country_code": "US",
+            "country_name": "États-Unis",
+            "region": "other",
+            "description": "Espace de notes, documents et bases de connaissances modulaires.",
+            "website": "https://www.notion.com/",
+            "pricing": "Offre personnelle gratuite ; abonnements d’équipe",
+            "license_name": "Propriétaire",
+            "category_name": "Documentation",
+            "category_slug": "documentation",
+            "alternative_count": 2
+        },
+        {
+            "slug": "trello",
+            "name": "Trello",
+            "vendor": "Atlassian",
+            "country_code": "US",
+            "country_name": "États-Unis",
+            "region": "other",
+            "description": "Tableaux Kanban simples pour organiser les tâches et les projets.",
+            "website": "https://trello.com/",
+            "pricing": "Offre gratuite ; abonnements payants",
+            "license_name": "Propriétaire",
+            "category_name": "Gestion de projet",
+            "category_slug": "gestion-projet",
+            "alternative_count": 3
+        },
+        {
+            "slug": "zoom",
+            "name": "Zoom",
+            "vendor": "Zoom Communications",
+            "country_code": "US",
+            "country_name": "États-Unis",
+            "region": "other",
+            "description": "Service de réunions vidéo, webinaires et salles de collaboration.",
+            "website": "https://www.zoom.com/",
+            "pricing": "Offre gratuite limitée ; abonnements payants",
+            "license_name": "Propriétaire",
+            "category_name": "Visioconférence",
+            "category_slug": "visioconference",
+            "alternative_count": 2
+        }
+    ]
+}

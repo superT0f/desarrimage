@@ -1,0 +1,18 @@
+# Dependencies
+api/vendor/
+client/node_modules/
+
+# Local configuration
+api/.env
+
+# Builds and caches
+client/dist/
+.phpunit.cache/
+.php-cs-fixer.cache
+.DS_Store
+*.log
+.tmp/
+
+# Editors
+.idea/
+.vscode/

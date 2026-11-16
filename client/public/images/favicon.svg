@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Désarrimage">
+  <rect width="128" height="128" rx="25" fill="#f2eee4"/>
+  <g transform="translate(-2 -2)" fill="none" stroke="#102f32" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24 116V22h38c37 0 60 18 60 47 0 19-9 34-24 42" stroke-width="8"/>
+    <path d="m97 111 3-20m-3 20-20-3" stroke-width="6"/>
+    <path d="M25 69h18" stroke-width="6"/>
+  </g>
+  <g transform="translate(47 44)">
+    <path d="m0 9 23-9 23 9v28L23 46 0 37Z" fill="#ed7353"/>
+    <path d="m0 9 23 9 23-9M23 18v28M12 4l23 9v28" fill="none" stroke="#102f32" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+</svg>

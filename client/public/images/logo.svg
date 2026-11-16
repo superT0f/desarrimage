@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 138" role="img" aria-labelledby="title desc">
+  <title id="title">Désarrimage</title>
+  <desc id="desc">Un D ouvert laissant sortir un conteneur, symbole de migration.</desc>
+  <g fill="none" stroke="#102f32" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24 116V22h38c37 0 60 18 60 47 0 19-9 34-24 42" stroke-width="8"/>
+    <path d="m97 111 3-20m-3 20-20-3" stroke-width="6"/>
+    <path d="M25 69h18" stroke-width="6"/>
+  </g>
+  <g transform="translate(49 46)">
+    <path d="m0 9 23-9 23 9v28L23 46 0 37Z" fill="#ed7353"/>
+    <path d="m0 9 23 9 23-9M23 18v28M12 4l23 9v28" fill="none" stroke="#102f32" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <circle cx="118" cy="28" r="4" fill="#ed7353"/>
+  <text x="151" y="77" fill="#102f32" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="52" font-weight="750" letter-spacing="-1.7">désarrimage</text>
+  <text x="155" y="108" fill="#176d68" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="700" letter-spacing="3.15">ALTERNATIVES · MIGRATIONS · EUROPE</text>
+</svg>

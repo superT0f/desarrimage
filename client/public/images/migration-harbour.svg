@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 620" role="img" aria-labelledby="title desc">
+  <title id="title">Le plan de traversée Désarrimage</title>
+  <desc id="desc">Une carte de migration relie un service actuel à une alternative européenne, entourée de conteneurs de données et d’un bateau.</desc>
+  <defs>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M28 0H0v28" fill="none" stroke="#176d68" stroke-opacity=".09"/>
+    </pattern>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#102f32" flood-opacity=".13"/>
+    </filter>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0 0 6 3 0 6" fill="none" stroke="#ed7353" stroke-width="1.5"/>
+    </marker>
+  </defs>
+
+  <circle cx="354" cy="309" r="263" fill="#e9e6dc"/>
+  <circle cx="354" cy="309" r="230" fill="none" stroke="#176d68" stroke-opacity=".12" stroke-dasharray="3 9"/>
+  <path d="M65 477c110-62 168-27 260 9 95 37 182 43 290-18" fill="none" stroke="#176d68" stroke-opacity=".18" stroke-width="2"/>
+  <path d="M54 494c110-62 176-23 267 13 94 37 179 36 289-23" fill="none" stroke="#176d68" stroke-opacity=".1" stroke-width="2"/>
+
+  <g transform="rotate(4 358 311)" filter="url(#shadow)">
+    <rect x="102" y="52" width="500" height="494" rx="9" fill="#fffdf8" stroke="#c7d1c9"/>
+    <rect x="119" y="69" width="466" height="460" fill="url(#grid)" stroke="#d9dfd8"/>
+    <path d="M119 119h466" stroke="#d9dfd8"/>
+    <circle cx="141" cy="94" r="4" fill="#ed7353"/>
+    <circle cx="155" cy="94" r="4" fill="#e6b85c"/>
+    <circle cx="169" cy="94" r="4" fill="#6ba9a0"/>
+    <text x="352" y="98" text-anchor="middle" fill="#62736f" font-family="Arial, sans-serif" font-size="9" font-weight="700" letter-spacing="2.2">CARTE DE TRAVERSÉE · Nº 001</text>
+    <path d="M565 88v12m-6-6h12" stroke="#176d68" stroke-width="1.5"/>
+
+    <text x="144" y="157" fill="#176d68" font-family="Arial, sans-serif" font-size="9" font-weight="700" letter-spacing="1.8">DE L’ANCIEN MONDE</text>
+    <text x="144" y="185" fill="#102f32" font-family="Arial, sans-serif" font-size="23" font-weight="700">Vos données,</text>
+    <text x="144" y="211" fill="#102f32" font-family="Georgia, serif" font-size="25" font-style="italic">sans les chaînes.</text>
+
+    <g transform="translate(457 147)">
+      <circle cx="39" cy="39" r="37" fill="#f2eee4" stroke="#b7c7c0"/>
+      <circle cx="39" cy="39" r="28" fill="none" stroke="#b7c7c0" stroke-dasharray="2 4"/>
+      <path d="m39 16 7 20-7 26-7-26Z" fill="#ed7353" stroke="#102f32" stroke-width="1.5"/>
+      <path d="m16 39 20-7 26 7-26 7Z" fill="#176d68" fill-opacity=".14" stroke="#102f32" stroke-width="1.5"/>
+      <circle cx="39" cy="39" r="4" fill="#102f32"/>
+      <text x="39" y="7" text-anchor="middle" fill="#176d68" font-family="Arial, sans-serif" font-size="7" font-weight="700">N</text>
+    </g>
+
+    <g transform="translate(145 259)">
+      <rect width="135" height="91" rx="5" fill="#f7e4dd" stroke="#e4b8aa"/>
+      <circle cx="26" cy="26" r="13" fill="#ed7353"/>
+      <text x="26" y="30" text-anchor="middle" fill="#102f32" font-family="Georgia, serif" font-size="14" font-weight="700">A</text>
+      <text x="47" y="23" fill="#8c4a39" font-family="Arial, sans-serif" font-size="7" font-weight="700" letter-spacing="1">POINT DE DÉPART</text>
+      <text x="47" y="36" fill="#102f32" font-family="Arial, sans-serif" font-size="10" font-weight="700">Service actuel</text>
+      <path d="M17 57h101M17 68h76M17 79h88" stroke="#cda99f" stroke-width="3" stroke-linecap="round"/>
+    </g>
+
+    <g transform="translate(421 259)">
+      <rect width="139" height="91" rx="5" fill="#e1eee8" stroke="#9fc1b9"/>
+      <circle cx="26" cy="26" r="13" fill="#176d68"/>
+      <text x="26" y="30" text-anchor="middle" fill="#fffdf8" font-family="Georgia, serif" font-size="14" font-weight="700">B</text>
+      <text x="47" y="23" fill="#176d68" font-family="Arial, sans-serif" font-size="7" font-weight="700" letter-spacing="1">NOUVEAU PORT</text>
+      <text x="47" y="36" fill="#102f32" font-family="Arial, sans-serif" font-size="10" font-weight="700">Alternative EU</text>
+      <path d="M17 57h105M17 68h88M17 79h99" stroke="#9fc1b9" stroke-width="3" stroke-linecap="round"/>
+    </g>
+
+    <path d="M280 304c42-50 88-49 135-6" fill="none" stroke="#ed7353" stroke-width="2.5" stroke-dasharray="5 6" marker-end="url(#arrow)"/>
+    <g transform="translate(332 254)">
+      <path d="M2 20h43l-7 11H11Z" fill="#102f32"/>
+      <path d="M13 9h21v11H13Z" fill="#ed7353"/>
+      <path d="M18 4h11v5H18Z" fill="#176d68"/>
+      <path d="M23 0v5" stroke="#102f32"/>
+      <path d="M0 35c8-5 15 5 23 0s15 5 23 0" fill="none" stroke="#176d68" stroke-width="1.5"/>
+    </g>
+
+    <text x="145" y="395" fill="#176d68" font-family="Arial, sans-serif" font-size="8" font-weight="700" letter-spacing="1.5">VOTRE ROUTE, ÉTAPE PAR ÉTAPE</text>
+    <g font-family="Arial, sans-serif">
+      <g transform="translate(145 414)">
+        <circle cx="13" cy="13" r="12" fill="#176d68"/>
+        <path d="m8 13 3 3 7-7" fill="none" stroke="#fffdf8" stroke-width="2"/>
+        <text x="38" y="11" fill="#102f32" font-size="10" font-weight="700">Inventorier les données</text>
+        <text x="38" y="25" fill="#62736f" font-size="8">Savoir ce qui part, ce qui reste</text>
+        <text x="395" y="17" text-anchor="end" fill="#62736f" font-size="8">01</text>
+      </g>
+      <path d="M145 456h415" stroke="#d9dfd8" stroke-dasharray="3 4"/>
+      <g transform="translate(145 469)">
+        <circle cx="13" cy="13" r="12" fill="#fffdf8" stroke="#176d68"/>
+        <text x="13" y="17" text-anchor="middle" fill="#176d68" font-size="9">2</text>
+        <text x="38" y="11" fill="#102f32" font-size="10" font-weight="700">Tester la traversée</text>
+        <text x="38" y="25" fill="#62736f" font-size="8">Un pilote, puis le retour arrière</text>
+        <text x="395" y="17" text-anchor="end" fill="#62736f" font-size="8">02</text>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(34 396) rotate(-7)" filter="url(#shadow)">
+    <rect width="127" height="67" rx="4" fill="#fffdf8" stroke="#c7d1c9"/>
+    <circle cx="19" cy="19" r="5" fill="#ed7353"/>
+    <text x="31" y="22" fill="#176d68" font-family="Arial, sans-serif" font-size="7" font-weight="700" letter-spacing=".8">DONNÉES À BORD</text>
+    <text x="15" y="44" fill="#102f32" font-family="Arial, sans-serif" font-size="11" font-weight="700">Vous gardez la main</text>
+    <path d="M15 54h92" stroke="#d9dfd8" stroke-width="2"/>
+  </g>
+
+  <g transform="translate(523 434) rotate(6)" filter="url(#shadow)">
+    <rect width="125" height="61" rx="4" fill="#176d68"/>
+    <text x="14" y="22" fill="#b9d4cd" font-family="Arial, sans-serif" font-size="7" font-weight="700" letter-spacing="1">GUIDES OUVERTS</text>
+    <text x="14" y="42" fill="#fffdf8" font-family="Arial, sans-serif" font-size="10" font-weight="700">Sources &amp; limites</text>
+    <path d="m104 16 3 3 6-7" fill="none" stroke="#ed7353" stroke-width="2"/>
+  </g>
+
+  <g transform="translate(199 545)">
+    <path d="M0 21h273l-34 36H43Z" fill="#102f32"/>
+    <path d="M30 21 53 5h154l32 16" fill="#176d68"/>
+    <g stroke="#102f32" stroke-width="2">
+      <path d="M63-7h47v28H63Z" fill="#ed7353"/>
+      <path d="M113-7h47v28h-47Z" fill="#f2eee4"/>
+      <path d="M88-31h47v24H88Z" fill="#6ba9a0"/>
+      <path d="M163-7h34v28h-34Z" fill="#ed7353"/>
+      <path d="M74-7v28m11-28v28m39-28v28m11-28v28M99-31v24m12-24v24m62 0v28"/>
+    </g>
+    <path d="M184-40v45m0-43 26 12h-26" fill="#f2eee4" stroke="#102f32" stroke-width="2"/>
+    <path d="M-9 62c22-12 41 12 63 0s41 12 63 0 41 12 63 0 41 12 63 0 41 12 63 0" fill="none" stroke="#176d68" stroke-width="2"/>
+  </g>
+
+  <g fill="#ed7353">
+    <path d="m76 184 3 8 8 3-8 3-3 8-3-8-8-3 8-3Z"/>
+    <path d="m613 364 2 6 6 2-6 2-2 6-2-6-6-2 6-2Z"/>
+    <circle cx="87" cy="224" r="3"/>
+    <circle cx="621" cy="180" r="4"/>
+  </g>
+</svg>
