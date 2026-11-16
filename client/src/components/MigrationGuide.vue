@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import CountryFlag from './CountryFlag.vue'
 
 const props = defineProps({
   guide: { type: Object, required: true },
@@ -79,7 +80,7 @@ const targetSources = (slug) => props.guide.sources.filter((source) => source.ta
           <thead>
             <tr>
               <th scope="col">Critère</th>
-              <th v-for="target in guide.targets" :key="target.slug" scope="col">{{ target.name }}</th>
+              <th v-for="target in guide.targets" :key="target.slug" scope="col"><CountryFlag :code="target.country_code" :country-name="target.country_name" />{{ target.name }}</th>
             </tr>
           </thead>
           <tbody>

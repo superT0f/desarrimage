@@ -92,7 +92,7 @@ final class GuideRepository
     private function targets(int $guideId): array
     {
         $statement = $this->database->prepare(
-            'SELECT t.slug, t.name, t.vendor, t.country_name, t.region, t.website
+            'SELECT t.slug, t.name, t.vendor, t.country_code, t.country_name, t.region, t.website
             FROM migration_guides g
             JOIN migrations m ON m.source_product_id = g.source_product_id
             JOIN products t ON t.id = m.target_product_id

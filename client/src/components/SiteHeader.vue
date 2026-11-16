@@ -25,6 +25,7 @@ watch(() => route.fullPath, () => { menuOpen.value = false })
       </button>
       <nav id="navigation-principale" :class="['main-nav', { open: menuOpen }]" aria-label="Navigation principale">
         <RouterLink to="/catalogue">Explorer</RouterLink>
+        <a href="/swagger.html">API</a>
         <RouterLink to="/#methode">La méthode</RouterLink>
         <RouterLink to="/contribuer">Contribuer</RouterLink>
         <a class="github-link" href="https://github.com/superT0f/desarrimage" target="_blank" rel="noopener">

@@ -1,4 +1,6 @@
 <script setup>
+import CountryFlag from './CountryFlag.vue'
+
 defineProps({
   product: { type: Object, required: true },
 })
@@ -15,7 +17,7 @@ defineProps({
     <div>
       <p class="product-category">{{ product.category_name }}</p>
       <h3>{{ product.name }}</h3>
-      <p class="product-vendor">{{ product.vendor }} · {{ product.country_name }}</p>
+      <p class="product-vendor">{{ product.vendor }} · <CountryFlag :code="product.country_code" :country-name="product.country_name" />{{ product.country_name }}</p>
     </div>
     <p class="product-description">{{ product.description }}</p>
     <div class="product-card-footer">

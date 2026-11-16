@@ -1,7 +1,7 @@
 Options -Indexes
 RewriteEngine On
 
-RewriteRule ^api/(?:health|stats|categories|guides(?:/.*)?|products(?:/.*)?)$ api/public/index.php [END,QSA]
+RewriteRule ^api/(?:health|stats|categories|openapi\.yaml|guides(?:/.*)?|products(?:/.*)?)$ api/public/index.php [END,QSA]
 RewriteRule ^api(?:/|$) - [F,L]
 RewriteRule ^data(?:/|$) - [F,L]
 

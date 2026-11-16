@@ -175,6 +175,7 @@ Le front répond sur `http://localhost:5173` et l’API sur `http://localhost:80
 | Route | Description |
 | --- | --- |
 | `GET /api/health` | Vérifie l’API et sa connexion à la base |
+| `GET /api/openapi.yaml` | Télécharge la spécification OpenAPI publique |
 | `GET /api/stats` | Compte les produits, alternatives et migrations |
 | `GET /api/categories` | Liste les catégories |
 | `GET /api/products` | Liste et filtre les produits |
@@ -186,6 +187,8 @@ Le front répond sur `http://localhost:5173` et l’API sur `http://localhost:80
 | `GET /api/guides/{slug}/risks` | Retourne le registre des risques |
 
 Exemple complet : [Google Drive vers trois alternatives](https://desarrimage.prigent.tech/produit/google-drive), avec API sur [`/api/guides/quitter-google-drive`](https://desarrimage.prigent.tech/api/guides/quitter-google-drive).
+
+La documentation interactive est disponible sur [`/swagger.html`](https://desarrimage.prigent.tech/swagger.html). Swagger UI et ses assets sont auto-hébergés ; aucun CDN n’est utilisé. `node scripts/sync-api-docs.mjs` copie la spécification et Swagger UI avant les commandes `dev` et `build`.
 
 Filtres disponibles : `search`, `category` et `region` (`fr`, `europe`, `other`).
 

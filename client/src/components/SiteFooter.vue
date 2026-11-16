@@ -12,6 +12,7 @@ const appVersion = __APP_VERSION__
       <div class="footer-links">
         <strong>Naviguer</strong>
         <RouterLink to="/catalogue">Le catalogue</RouterLink>
+        <a href="/swagger.html">Documentation API ↗</a>
         <RouterLink to="/contribuer">Proposer une fiche</RouterLink>
         <a href="https://github.com/superT0f/desarrimage" target="_blank" rel="noopener">Code source ↗</a>
       </div>

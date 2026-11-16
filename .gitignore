@@ -7,6 +7,8 @@ api/.env
 
 # Builds and caches
 client/dist/
+client/public/swagger-assets/
+client/public/openapi.yaml
 .phpunit.cache/
 .php-cs-fixer.cache
 .DS_Store

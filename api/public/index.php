@@ -61,6 +61,15 @@ $app->get('/api/categories', static function () use ($json): Response {
     return $json(['data' => (new CatalogRepository(Database::connect()))->categories()]);
 });
 
+$app->get('/api/openapi.yaml', static function (): Response {
+    $response = new SlimResponse();
+    $response->getBody()->write(file_get_contents(dirname(__DIR__) . '/openapi.yaml'));
+
+    return $response
+        ->withHeader('Content-Type', 'application/yaml; charset=utf-8')
+        ->withHeader('Cache-Control', 'public, max-age=300');
+});
+
 $app->get('/api/products', static function (Request $request) use ($json): Response {
     $query = $request->getQueryParams();
     $products = (new CatalogRepository(Database::connect()))->products(

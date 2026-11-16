@@ -3,6 +3,7 @@ import { computed, nextTick, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { useCatalogStore } from '../stores/catalog'
 import MigrationGuide from '../components/MigrationGuide.vue'
+import CountryFlag from '../components/CountryFlag.vue'
 
 const route = useRoute()
 const catalog = useCatalogStore()
@@ -72,7 +73,7 @@ watch(
             </div>
             <p class="product-lead">{{ product.description }}</p>
             <div class="product-meta">
-              <span>{{ product.vendor }}</span><span>{{ product.country_name }}</span><span>{{ product.license_name }}</span>
+              <span>{{ product.vendor }}</span><span><CountryFlag :code="product.country_code" :country-name="product.country_name" />{{ product.country_name }}</span><span>{{ product.license_name }}</span>
             </div>
           </div>
           <aside class="product-hero-aside">
@@ -104,7 +105,7 @@ watch(
             @click="selectedId = migration.id"
           >
             <span class="product-monogram" :class="migration.target.region">{{ migration.target.name.charAt(0) }}</span>
-            <span><strong>{{ migration.target.name }}</strong><small>{{ migration.target.country_name }} · {{ migration.target.vendor }}</small></span>
+            <span><strong>{{ migration.target.name }}</strong><small><CountryFlag :code="migration.target.country_code" :country-name="migration.target.country_name" />{{ migration.target.country_name }} · {{ migration.target.vendor }}</small></span>
             <i aria-hidden="true">→</i>
           </button>
         </div>

@@ -1,0 +1,568 @@
+openapi: 3.0.3
+info:
+  title: Désarrimage — API publique
+  version: 0.3.0
+  description: |
+    API ouverte en lecture seule des alternatives numériques françaises et européennes et de leurs guides de migration.
+
+    Les données sont contributives via GitHub. Les coûts des guides sont exprimés en **centimes d’euros** et les charges en **jours-homme**. Les estimations ne constituent pas un devis.
+  contact:
+    name: Désarrimage sur GitHub
+    url: https://github.com/superT0f/desarrimage
+  license:
+    name: AGPL-3.0-or-later — données CC BY-SA 4.0
+    url: https://github.com/superT0f/desarrimage/blob/main/LICENSE
+servers:
+  - url: /
+tags:
+  - name: Catalogue
+  - name: Guides
+  - name: Santé
+paths:
+  /api/health:
+    get:
+      tags: [Santé]
+      summary: Vérifier l’API et sa connexion MySQL
+      operationId: getHealth
+      responses:
+        '200':
+          description: API et base accessibles
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /api/stats:
+    get:
+      tags: [Catalogue]
+      summary: Obtenir les compteurs du catalogue
+      operationId: getStats
+      responses:
+        '200':
+          description: Compteurs publics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Stats'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /api/categories:
+    get:
+      tags: [Catalogue]
+      summary: Lister les catégories
+      operationId: getCategories
+      responses:
+        '200':
+          description: Catégories disponibles
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Category'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /api/products:
+    get:
+      tags: [Catalogue]
+      summary: Rechercher des produits et alternatives
+      operationId: getProducts
+      parameters:
+        - name: search
+          in: query
+          description: Recherche dans le nom, l’éditeur et la description
+          schema:
+            type: string
+          example: nextcloud
+        - name: category
+          in: query
+          description: Slug de catégorie
+          schema:
+            type: string
+            enum: [messagerie, collaboration, stockage, documentation, gestion-projet, visioconference]
+        - name: region
+          in: query
+          description: Origine du produit
+          schema:
+            type: string
+            enum: [fr, europe, other]
+      responses:
+        '200':
+          description: Produits correspondant aux filtres
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  meta:
+                    $ref: '#/components/schemas/Count'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /api/products/{slug}:
+    get:
+      tags: [Catalogue]
+      summary: Obtenir un produit et ses migrations
+      operationId: getProduct
+      parameters:
+        - $ref: '#/components/parameters/ProductSlug'
+      responses:
+        '200':
+          description: Fiche produit, destinations et modes opératoires
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/ProductDetail'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /api/guides:
+    get:
+      tags: [Guides]
+      summary: Lister les guides comparatifs publiés
+      operationId: getGuides
+      responses:
+        '200':
+          description: Guides publiés et leurs destinations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GuideSummary'
+                  meta:
+                    $ref: '#/components/schemas/Count'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /api/guides/{slug}:
+    get:
+      tags: [Guides]
+      summary: Obtenir un guide comparatif complet
+      operationId: getGuide
+      parameters:
+        - $ref: '#/components/parameters/GuideSlug'
+      responses:
+        '200':
+          description: Scénario, comparaison, coûts, risques, planning et sources
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Guide'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /api/guides/{slug}/{section}:
+    get:
+      tags: [Guides]
+      summary: Obtenir une seule section d’un guide
+      operationId: getGuideSection
+      parameters:
+        - $ref: '#/components/parameters/GuideSlug'
+        - name: section
+          in: path
+          required: true
+          description: Section souhaitée
+          schema:
+            type: string
+            enum: [comparison, costs, risks]
+      responses:
+        '200':
+          description: Section demandée
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  parameters:
+    ProductSlug:
+      name: slug
+      in: path
+      required: true
+      description: Slug du produit
+      schema:
+        type: string
+      example: google-drive
+    GuideSlug:
+      name: slug
+      in: path
+      required: true
+      description: Slug du guide
+      schema:
+        type: string
+      example: quitter-google-drive
+  responses:
+    NotFound:
+      description: Ressource introuvable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Erreur technique
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Produit introuvable.
+    Count:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 1
+    Stats:
+      type: object
+      properties:
+        source_products:
+          type: integer
+          example: 6
+        alternatives:
+          type: integer
+          example: 14
+        migrations:
+          type: integer
+          example: 14
+        categories:
+          type: integer
+          example: 6
+        guides:
+          type: integer
+          example: 1
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+        slug:
+          type: string
+          example: stockage
+        name:
+          type: string
+          example: Stockage & partage
+        description:
+          type: string
+    Product:
+      type: object
+      properties:
+        slug:
+          type: string
+          example: nextcloud
+        name:
+          type: string
+          example: Nextcloud
+        vendor:
+          type: string
+          example: Nextcloud GmbH
+        country_code:
+          type: string
+          example: DE
+        country_name:
+          type: string
+          example: Allemagne
+        region:
+          type: string
+          enum: [fr, europe, other]
+        description:
+          type: string
+        website:
+          type: string
+          format: uri
+        pricing:
+          type: string
+          nullable: true
+        license_name:
+          type: string
+          nullable: true
+        category_slug:
+          type: string
+        category_name:
+          type: string
+        alternative_count:
+          type: integer
+          description: Nombre de migrations depuis ce produit
+        guide_slug:
+          type: string
+          nullable: true
+          example: quitter-google-drive
+    ProductDetail:
+      allOf:
+        - $ref: '#/components/schemas/Product'
+        - type: object
+          properties:
+            migrations:
+              type: array
+              items:
+                $ref: '#/components/schemas/Migration'
+    Migration:
+      type: object
+      properties:
+        id:
+          type: integer
+        difficulty:
+          type: string
+          enum: [facile, intermediaire, avancee]
+        duration:
+          type: string
+        summary:
+          type: string
+        verified_at:
+          type: string
+          format: date
+          nullable: true
+        target:
+          $ref: '#/components/schemas/Product'
+        advantages:
+          type: array
+          items:
+            type: string
+        disadvantages:
+          type: array
+          items:
+            type: string
+        steps:
+          type: array
+          items:
+            type: object
+            properties:
+              position:
+                type: integer
+              title:
+                type: string
+              body:
+                type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+    GuideSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+        slug:
+          type: string
+          example: quitter-google-drive
+        title:
+          type: string
+        summary:
+          type: string
+        users:
+          type: integer
+          example: 10
+        data_gb:
+          type: integer
+          example: 100
+        updated_at:
+          type: string
+          format: date
+        source:
+          $ref: '#/components/schemas/Product'
+        targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+    Scenario:
+      type: object
+      properties:
+        users:
+          type: integer
+          example: 10
+        data_gb:
+          type: integer
+          example: 100
+        shared_drives:
+          type: integer
+          example: 2
+        native_documents_percentage:
+          type: integer
+          example: 35
+        window_days:
+          type: integer
+          example: 10
+        day_rate_cents:
+          type: integer
+          example: 40000
+        currency:
+          type: string
+          example: EUR
+        tax_label:
+          type: string
+          example: HT / à confirmer
+    Guide:
+      allOf:
+        - $ref: '#/components/schemas/GuideSummary'
+        - type: object
+          properties:
+            verified_at:
+              type: string
+              format: date
+              nullable: true
+            scenario:
+              $ref: '#/components/schemas/Scenario'
+            comparison:
+              type: array
+              items:
+                $ref: '#/components/schemas/ComparisonRow'
+            costs:
+              type: array
+              items:
+                $ref: '#/components/schemas/Cost'
+            assumptions:
+              type: array
+              items:
+                type: string
+            risks:
+              type: array
+              items:
+                $ref: '#/components/schemas/Risk'
+            timeline:
+              type: array
+              items:
+                $ref: '#/components/schemas/TimelinePhase'
+            decisions:
+              type: array
+              items:
+                type: object
+            sources:
+              type: array
+              items:
+                $ref: '#/components/schemas/Source'
+    ComparisonRow:
+      type: object
+      properties:
+        position:
+          type: integer
+        criterion:
+          type: string
+          example: Import depuis Google Drive
+        values:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            nextcloud: Import unique via Google integration
+            kdrive: Copie via rclone-ui
+            cozy-drive: Upload manuel
+    Cost:
+      type: object
+      properties:
+        target:
+          $ref: '#/components/schemas/Product'
+        recurring_monthly_cents:
+          type: integer
+          example: 7188
+        recurring_label:
+          type: string
+        migration_days:
+          type: number
+          format: float
+          example: 3.0
+        annual_operation_days:
+          type: number
+          format: float
+          example: 2.0
+        migration_cost_cents:
+          type: integer
+          example: 120000
+        annual_operation_cost_cents:
+          type: integer
+          example: 80000
+        year_one_total_cents:
+          type: integer
+          example: 286256
+        year_two_total_cents:
+          type: integer
+          example: 166256
+        notes:
+          type: string
+    Risk:
+      type: object
+      properties:
+        target:
+          $ref: '#/components/schemas/Product'
+          nullable: true
+        title:
+          type: string
+        probability:
+          type: string
+          enum: [faible, moyenne, elevee]
+        impact:
+          type: string
+          enum: [faible, moyen, eleve]
+        score:
+          type: integer
+          minimum: 1
+          maximum: 9
+          example: 6
+        level:
+          type: string
+          enum: [faible, modere, eleve]
+        mitigation:
+          type: string
+    TimelinePhase:
+      type: object
+      properties:
+        position:
+          type: integer
+        phase:
+          type: string
+        start_day:
+          type: integer
+        duration_days:
+          type: integer
+        description:
+          type: string
+    Source:
+      type: object
+      properties:
+        target:
+          $ref: '#/components/schemas/Product'
+          nullable: true
+        kind:
+          type: string
+          enum: [documentation, pricing, migration, security]
+        label:
+          type: string
+        url:
+          type: string
+          format: uri

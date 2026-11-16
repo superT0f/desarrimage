@@ -39,6 +39,7 @@ Règles d’honnêteté :
 - `client/public/catalog-snapshot.json` : instantané généré pour la home, à ne pas éditer à la main.
 - `Dockerfile` : targets `api` et `client`, images qualifiées avec `docker.io/library/...` pour rester compatibles Podman.
 - `compose.yaml` : front, API et MariaDB avec volumes persistants.
+- `api/openapi.yaml` : contrat public de l’API, servi sur `/api/openapi.yaml` et affiché par `/swagger.html` via Swagger UI auto-hébergé.
 - `Makefile` : développement, contrôles, releases et déploiement Gandi.
 - `scripts/` : synchronisation SemVer et génération du changelog.
 
@@ -142,6 +143,9 @@ Règles impératives :
 Après une modification d’architecture, de commande, de licence, de versionnement ou de déploiement, mettre à jour dans le même changement :
 
 - `README.md` pour les utilisateurs et contributeurs ;
+- `api/openapi.yaml` pour toute modification d’endpoint, de paramètre ou de schéma ;
 - `CONTRIBUTING.md` pour le processus éditorial ;
 - `AGENTS.md` pour les futurs agents ;
 - les badges uniquement s’ils représentent un état réel.
+
+Swagger UI est copié par `client/scripts/sync-api-docs.mjs` dans `client/public/swagger-assets/`, répertoire généré et ignoré par Git. L’interface est `/swagger.html` et la spécification `/api/openapi.yaml` ; ne pas utiliser de chemin public commençant par `/api/` pour ces assets, car le proxy Vite les transmettrait à PHP.
