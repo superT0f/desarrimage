@@ -5,6 +5,7 @@ WORKDIR /app
 COPY client/package.json client/package-lock.json ./
 RUN npm ci --no-audit --no-fund
 COPY client/ ./
+COPY api/openapi.yaml /app/spec/openapi.yaml
 COPY LICENSE ./LICENSE
 EXPOSE 5173
 CMD ["sh", "-c", "npm ci --no-audit --no-fund && npm run dev -- --host 0.0.0.0"]
