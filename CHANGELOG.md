@@ -6,6 +6,18 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le pr
 
 <!-- releases -->
 
+## [0.6.0](https://github.com/superT0f/desarrimage/tree/v0.6.0) — 2026-11-16
+
+### 🚀 Ajouté
+
+- partager les guides et documenter la gouvernance ([540f339](https://github.com/superT0f/desarrimage/commit/540f339ac0de29482b609148b6415406d33be83e))
+
+### 📚 Documentation
+
+- publier les scores Lighthouse de production ([3e42310](https://github.com/superT0f/desarrimage/commit/3e42310f5cc63badd97bd74ad447cbae5596b3e8))
+
+
+
 ## [0.5.0](https://github.com/superT0f/desarrimage/tree/v0.5.0) — 2026-11-16
 
 ### 🚀 Ajouté
