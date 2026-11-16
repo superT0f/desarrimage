@@ -44,7 +44,7 @@ const targetSources = (slug) => props.guide.sources.filter((source) => source.ta
 
     <SharePack :guide="guide" />
 
-    <div class="scenario-grid" aria-label="Hypothèses du scénario">
+    <div class="scenario-grid" role="group" aria-label="Hypothèses du scénario">
       <div><strong>{{ guide.scenario.users }}</strong><span>utilisateurs</span></div>
       <div><strong>{{ guide.scenario.data_gb }} Go</strong><span>de données</span></div>
       <div><strong>{{ guide.scenario.shared_drives }}</strong><span>Drives partagés</span></div>

@@ -144,7 +144,7 @@ watch(
 
         <MigrationGuide v-if="product.guide" :guide="product.guide" />
 
-        <article
+        <div
           v-if="selectedMigration"
           :id="`panel-${selectedMigration.id}`"
           class="migration-panel"
@@ -208,7 +208,7 @@ watch(
               </div>
             </aside>
           </div>
-        </article>
+        </div>
       </div>
     </section>
 
