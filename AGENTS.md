@@ -42,6 +42,7 @@ Règles d’honnêteté :
 - `api/openapi.yaml` : contrat public de l’API, servi sur `/api/openapi.yaml` et affiché par `/swagger.html` via Swagger UI auto-hébergé.
 - `Makefile` : développement, contrôles, releases et déploiement Gandi.
 - `scripts/` : synchronisation SemVer et génération du changelog.
+- `docs/releases/` : notes techniques et marketing par version ; `docs/images/` contient leurs captures réelles.
 
 ## 🐳 Développement
 
@@ -113,7 +114,7 @@ Les modifications éditoriales se font dans `data/catalog.json` et `data/guides/
 - Utiliser les Conventional Commits : `feat`, `fix`, `docs`, `ci`, `chore`, etc.
 - `.version` est la référence SemVer, synchronisée avec `client/package.json` et `client/package-lock.json`.
 - Ne pas éditer `CHANGELOG.md` à la main : utiliser `make changelog`.
-- Préparer une release avec `make release VERSION=x.y.z`, relire le diff, committer, taguer `vx.y.z` puis pousser branche et tag.
+- Préparer les notes technique et marketing dans `docs/releases/` avec captures si nécessaire, puis lancer `make release VERSION=x.y.z`, relire le diff, committer, taguer `vx.y.z` et pousser branche et tag.
 - Ne pas régénérer le changelog d’une version déjà taguée pour y ajouter des commits ultérieurs : préparer la version suivante.
 
 ## 🚀 Production Gandi

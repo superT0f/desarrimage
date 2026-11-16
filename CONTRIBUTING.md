@@ -36,6 +36,8 @@ Utilisez les [Conventional Commits](https://www.conventionalcommits.org/fr/v1.0.
 
 Les versions suivent SemVer. `make release VERSION=x.y.z` synchronise les fichiers de version et régénère le changelog avant la revue et le tag.
 
+Avant une release marquante, préparez `docs/releases/x.y.z-tech.md` et `docs/releases/x.y.z-marketing.md`, avec des captures utiles dans `docs/images/`. La note technique liste les changements et vérifications ; la note marketing explique les bénéfices sans masquer les limites ni transformer les estimations en promesses.
+
 ## Revue
 
 Ouvrez une pull request en décrivant le scénario testé, sa date et son environnement. Les mainteneurs peuvent demander des sources complémentaires ou une reformulation.

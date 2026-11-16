@@ -55,14 +55,29 @@ Chaque fiche propose :
 
 Le projet est indépendant, sans publicité et sans classement sponsorisé. Moins de dépendance, plus de documentation. ⚓
 
-## ✨ Dans la besace de la v0.1
+## ✨ Dans la besace
 
 - **20 produits** documentés ;
 - **14 alternatives** françaises ou européennes ;
 - **14 migrations** détaillées, soit **56 étapes** actionnables ;
 - Gmail, Slack, Google Drive, Notion, Trello et Zoom parmi les premiers outils à quitter ;
-- une API publique en lecture seule ;
+- un guide complet avec **10 critères, 3 budgets et 7 risques** ;
+- une API publique en lecture seule et son Swagger auto-hébergé ;
 - une home qui reste utilisable grâce à un instantané du catalogue si l’API fait une sieste.
+
+## 🚀 Nouveau en 0.4.2 — la réponse à la grande question
+
+La 0.4.2 apporte le premier guide comparatif complet **Google Drive → Nextcloud, kDrive et Twake Drive**, les coûts calculés, le registre des risques et une documentation OpenAPI publique. Parce que **42 est la réponse**, mais qu’un bon plan de migration reste quand même recommandé. ⚓
+
+- 📣 [Lire la note marketing](docs/releases/0.4.2-marketing.md)
+- ⚙️ [Lire la note technique](docs/releases/0.4.2-tech.md)
+- 🗺️ [Explorer le guide en production](https://desarrimage.prigent.tech/produit/google-drive)
+- 🔌 [Ouvrir le Swagger](https://desarrimage.prigent.tech/swagger.html)
+
+<p>
+  <img src="docs/images/release-0.4.2-comparison.png" alt="Comparatif Google Drive vers trois alternatives" width="49%" />
+  <img src="docs/images/release-0.4.2-swagger.png" alt="Documentation Swagger publique de Désarrimage" width="49%" />
+</p>
 
 ## 🐳 Démarrer avec Docker — la voie royale
 
@@ -226,6 +241,8 @@ make release VERSION=0.2.0      # Synchronise la version + changelog
 ```
 
 Le [CHANGELOG.md](CHANGELOG.md) est généré automatiquement à partir des **Conventional Commits** : `feat`, `fix`, `docs`, `ci`, `chore`, etc. Chaque entrée pointe vers son commit et chaque version vers son tag GitHub.
+
+Chaque release dispose aussi de deux récits dans `docs/releases/` : une note technique et une note marketing, complétées par des captures dans `docs/images/`. Pour la 0.4.2 : [tech](docs/releases/0.4.2-tech.md) et [marketing](docs/releases/0.4.2-marketing.md).
 
 ```bash
 git commit -m "feat(api): ajouter le filtre par hébergeur"
