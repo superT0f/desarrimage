@@ -35,6 +35,7 @@ Règles d’honnêteté :
 - `api/` : PHP 8.4, Slim 4, PDO, Phinx, MariaDB/MySQL.
 - `client/` : Vue 3, JavaScript, Vite 5, Pinia, Vue Router, Axios et CSS global.
 - `data/catalog.json` : catalogue contributif importé par un seed idempotent.
+- `data/guides/` : guides riches séparés, importés dans des tables normalisées (critères, valeurs, coûts, risques, phases et sources) par `GuideSeeder` et exposés par `GuideRepository`.
 - `client/public/catalog-snapshot.json` : instantané généré pour la home, à ne pas éditer à la main.
 - `Dockerfile` : targets `api` et `client`, images qualifiées avec `docker.io/library/...` pour rester compatibles Podman.
 - `compose.yaml` : front, API et MariaDB avec volumes persistants.
@@ -87,7 +88,7 @@ La CI GitHub Actions reconstruit aussi les images et effectue un smoke test de l
 
 ## 🗺️ Données et contenu
 
-Les modifications éditoriales se font dans `data/catalog.json` via PR.
+Les modifications éditoriales se font dans `data/catalog.json` et `data/guides/` via PR. Les guides riches sont publics en lecture sur `/api/guides` ; les contributions passent par Git, jamais par une écriture API anonyme.
 
 - Conserver les avantages **et** les inconvénients.
 - Sourcer les affirmations et distinguer France, Europe et extra-européen.

@@ -56,5 +56,9 @@ export const useCatalogStore = defineStore('catalog', {
       const response = await api.get(`/products/${slug}`)
       return response.data
     },
+    async fetchGuide(slug) {
+      const response = await api.get(`/guides/${slug}`)
+      return response.data
+    },
   },
 })

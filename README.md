@@ -139,14 +139,16 @@ desarrimage/
 ├── 🖥️ client/
 │   ├── public/                   # SVG et instantané du catalogue
 │   └── src/                      # Vue 3, Pinia, Router, Axios et Vite
-├── 🗺️ data/catalog.json          # Le vrai trésor : les fiches contributives
+├── 🗺️ data/catalog.json          # Produits et migrations contributifs
+├── 📊 data/guides/               # Comparatifs, coûts, risques et sources
 └── 🚀 Makefile                   # Dev, qualité et déploiement Gandi
 ```
 
 - **Back** : PHP 8.4, Slim 4, PDO, Phinx, MariaDB/MySQL ;
 - **Front** : Vue 3, Vite 5, Pinia, Vue Router, Axios ;
 - **Infra** : Docker Compose pour le développement, Apache + MySQL chez Gandi pour la production ;
-- **Données** : JSON lisible et versionné, importé en base avec un seed idempotent.
+- **Données** : JSON lisible et versionné, importé en base avec un seed idempotent ;
+- **Guides riches** : scénario, critères et cellules de comparaison, coûts calculés, risques, chronologie et sources stockés dans des tables normalisées. Chaque élément reste contributif séparément dans `data/guides/`.
 
 ## 🛠️ Développement sans Docker
 
@@ -177,6 +179,13 @@ Le front répond sur `http://localhost:5173` et l’API sur `http://localhost:80
 | `GET /api/categories` | Liste les catégories |
 | `GET /api/products` | Liste et filtre les produits |
 | `GET /api/products/{slug}` | Retourne une fiche et ses modes opératoires |
+| `GET /api/guides` | Liste les guides comparatifs publiés |
+| `GET /api/guides/{slug}` | Retourne un guide complet et ses coûts calculés |
+| `GET /api/guides/{slug}/comparison` | Retourne uniquement le comparatif normalisé |
+| `GET /api/guides/{slug}/costs` | Retourne les hypothèses et coûts par destination |
+| `GET /api/guides/{slug}/risks` | Retourne le registre des risques |
+
+Exemple complet : [Google Drive vers trois alternatives](https://desarrimage.prigent.tech/produit/google-drive), avec API sur [`/api/guides/quitter-google-drive`](https://desarrimage.prigent.tech/api/guides/quitter-google-drive).
 
 Filtres disponibles : `search`, `category` et `region` (`fr`, `europe`, `other`).
 

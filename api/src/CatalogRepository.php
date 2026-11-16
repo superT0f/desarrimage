@@ -19,7 +19,8 @@ final class CatalogRepository
                 (SELECT COUNT(*) FROM products WHERE region = 'other') AS source_products,
                 (SELECT COUNT(*) FROM products WHERE region != 'other') AS alternatives,
                 (SELECT COUNT(*) FROM migrations) AS migrations,
-                (SELECT COUNT(*) FROM categories) AS categories"
+                (SELECT COUNT(*) FROM categories) AS categories,
+                (SELECT COUNT(*) FROM migration_guides WHERE status = 'published') AS guides"
         )->fetch();
     }
 
@@ -71,8 +72,11 @@ final class CatalogRepository
     public function product(string $slug): ?array
     {
         $statement = $this->database->prepare(
-            'SELECT p.*, c.slug AS category_slug, c.name AS category_name
-            FROM products p JOIN categories c ON c.id = p.category_id WHERE p.slug = :slug'
+            "SELECT p.*, c.slug AS category_slug, c.name AS category_name, g.slug AS guide_slug
+            FROM products p
+            JOIN categories c ON c.id = p.category_id
+            LEFT JOIN migration_guides g ON g.source_product_id = p.id AND g.status = 'published'
+            WHERE p.slug = :slug"
         );
         $statement->execute(['slug' => $slug]);
         $product = $statement->fetch();

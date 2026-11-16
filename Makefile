@@ -83,6 +83,7 @@ check:
 	find api/src api/public api/scripts api/db/migrations scripts -name '*.php' -print0 | xargs -0 -n1 php -l
 	php -r "json_decode(file_get_contents('data/catalog.json'), true, 512, JSON_THROW_ON_ERROR); echo 'Catalogue JSON valide'.PHP_EOL;"
 	php scripts/check-version.php "$$(cat .version)"
+	php scripts/check-guides.php
 	$(MAKE) --no-print-directory build
 
 snapshot:

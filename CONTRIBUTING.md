@@ -14,6 +14,14 @@ Le projet est développé en pair-programming humain–IA par SuperT0f avec **Ki
 6. Validez le JSON avec `php -r "json_decode(file_get_contents('data/catalog.json'), true, 512, JSON_THROW_ON_ERROR);"`.
 7. Testez l’import avec `php api/scripts/seed.php`, puis ouvrez la fiche dans l’interface.
 
+## Ajouter un guide comparatif complet
+
+Les guides riches vivent dans `data/guides/<source>.json`, séparément du catalogue. Ils décrivent un scénario mesurable : utilisateurs, volume, fenêtre de migration, tarif du jour-homme, critères, coûts, risques, chronologie et sources.
+
+Chaque ligne de `comparison` contient un critère et une valeur par produit cible. Modifiez uniquement la cellule concernée dans votre PR. Les coûts utilisent des centimes d’euros et des jours-homme ; l’API calcule les coûts de migration, d’exploitation et de première année. N’inscrivez donc pas de total calculé à la main.
+
+Les estimations doivent indiquer leur date, leurs hypothèses et leurs sources. Elles ne sont jamais présentées comme un devis. `verified_at` reste `null` tant que le scénario n’a pas été réellement testé. `make check` valide la structure et les produits référencés ; l’import Docker peuple ensuite les tables normalisées et expose le guide sur `/api/guides/<slug>`.
+
 ## Critères éditoriaux
 
 - **France** : éditeur français ou projet principalement développé en France.

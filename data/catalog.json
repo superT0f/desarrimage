@@ -191,16 +191,16 @@
     },
     {
       "slug": "cozy-drive",
-      "name": "Cozy Drive",
-      "vendor": "Cozy Cloud",
+      "name": "Twake Drive (Cozy)",
+      "vendor": "Twake / Cozy Cloud",
       "category": "stockage",
       "country_code": "FR",
       "country_name": "France",
       "region": "fr",
-      "description": "Cloud personnel français pour centraliser, synchroniser et partager documents et données.",
-      "website": "https://cozy.io/fr/",
-      "pricing": "Offres d’essai et abonnements",
-      "license_name": "AGPL 3.0"
+      "description": "Drive de la suite collaborative française Twake Workplace, avec espaces d’équipe, coédition et partage.",
+      "website": "https://twake.app/twake-pro/",
+      "pricing": "Offres organisation à partir de 9 €/utilisateur/mois ; quota à confirmer",
+      "license_name": "Open source selon les composants"
     },
     {
       "slug": "cryptpad",

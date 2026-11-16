@@ -1,7 +1,8 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { useCatalogStore } from '../stores/catalog'
+import MigrationGuide from '../components/MigrationGuide.vue'
 
 const route = useRoute()
 const catalog = useCatalogStore()
@@ -30,8 +31,15 @@ watch(
     selectedId.value = null
     try {
       product.value = await catalog.fetchProduct(slug)
+      if (product.value.guide_slug) {
+        product.value.guide = await catalog.fetchGuide(product.value.guide_slug)
+      }
       selectedId.value = product.value.migrations[0]?.id || null
       document.title = `${product.value.name} — Désarrimage`
+      await nextTick()
+      if (route.hash) {
+        document.querySelector(route.hash)?.scrollIntoView({ block: 'start' })
+      }
     } catch (requestError) {
       error.value = requestError.message
     } finally {
@@ -100,6 +108,8 @@ watch(
             <i aria-hidden="true">→</i>
           </button>
         </div>
+
+        <MigrationGuide v-if="product.guide" :guide="product.guide" />
 
         <article
           v-if="selectedMigration"

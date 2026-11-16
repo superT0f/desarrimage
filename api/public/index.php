@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Desarrimage\CatalogRepository;
 use Desarrimage\Database;
 use Desarrimage\Env;
+use Desarrimage\GuideRepository;
 use Dotenv\Dotenv;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -69,6 +70,33 @@ $app->get('/api/products', static function (Request $request) use ($json): Respo
     );
 
     return $json(['data' => $products, 'meta' => ['count' => count($products)]]);
+});
+
+$app->get('/api/guides', static function () use ($json): Response {
+    $guides = (new GuideRepository(Database::connect()))->summaries();
+
+    return $json(['data' => $guides, 'meta' => ['count' => count($guides)]]);
+});
+
+$app->get('/api/guides/{slug}', static function (Request $request, Response $response, array $args) use ($json): Response {
+    $guide = (new GuideRepository(Database::connect()))->find($args['slug']);
+    if ($guide === null) {
+        throw new HttpNotFoundException($request, 'Guide introuvable.');
+    }
+
+    return $json(['data' => $guide]);
+});
+
+$app->get('/api/guides/{slug}/{section}', static function (Request $request, Response $response, array $args) use ($json): Response {
+    if (!in_array($args['section'], ['comparison', 'costs', 'risks'], true)) {
+        throw new HttpNotFoundException($request, 'Section de guide introuvable.');
+    }
+    $guide = (new GuideRepository(Database::connect()))->find($args['slug']);
+    if ($guide === null) {
+        throw new HttpNotFoundException($request, 'Guide introuvable.');
+    }
+
+    return $json(['data' => $guide[$args['section']]]);
 });
 
 $app->get('/api/products/{slug}', static function (Request $request, Response $response, array $args) use ($json): Response {

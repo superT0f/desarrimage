@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Desarrimage\Database;
+use Desarrimage\GuideSeeder;
 use Dotenv\Dotenv;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
@@ -113,12 +114,20 @@ try {
         }
     }
 
+    $guideSeeder = new GuideSeeder($database);
+    $guideFiles = glob(dirname(__DIR__, 2) . '/data/guides/*.json') ?: [];
+    foreach ($guideFiles as $guideFile) {
+        $guide = json_decode(file_get_contents($guideFile), true, 512, JSON_THROW_ON_ERROR);
+        $guideSeeder->seed($guide, $productIds);
+    }
+
     $database->commit();
     printf(
-        "Catalogue importé : %d catégories, %d produits, %d migrations.\n",
+        "Catalogue importé : %d catégories, %d produits, %d migrations, %d guides.\n",
         count($catalog['categories']),
         count($catalog['products']),
-        count($catalog['migrations'])
+        count($catalog['migrations']),
+        count($guideFiles)
     );
 } catch (Throwable $exception) {
     $database->rollBack();
