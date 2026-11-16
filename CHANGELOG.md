@@ -6,6 +6,18 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le pr
 
 <!-- releases -->
 
+## [0.5.0](https://github.com/superT0f/desarrimage/tree/v0.5.0) — 2026-11-16
+
+### 🚀 Ajouté
+
+- rendre la vitrine accessible et personnalisable ([1cb26ac](https://github.com/superT0f/desarrimage/commit/1cb26ac4c9906028adc5f88f0ea394e18d62d070))
+
+### 📚 Documentation
+
+- préciser les versions Podman testées ([7ff8007](https://github.com/superT0f/desarrimage/commit/7ff8007a2ca30a074ac0b3e3c976ae41e2caa71b))
+
+
+
 ## [0.4.2](https://github.com/superT0f/desarrimage/tree/v0.4.2) — 2026-11-16
 
 ### 🐛 Corrigé
