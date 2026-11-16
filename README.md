@@ -1,25 +1,157 @@
-# Désarrimage
+<div align="center">
+  <img src="client/public/images/logo.svg" alt="Désarrimage" width="520" />
 
-**Changer de cap, pas d’habitudes.**
+  <h1>⚓ Désarrimage</h1>
 
-Désarrimage est un annuaire open source d’alternatives numériques françaises et européennes, avec des modes opératoires concrets pour quitter les services extra-européens : préparation, export, bascule, vérification et retour arrière.
+  <p><strong>Changer de cap, pas d’habitudes.</strong></p>
+  <p>Des alternatives françaises et européennes… et surtout le plan de vol pour y aller sans perdre vos données en mer.</p>
 
-Le projet ne se contente pas de répondre « par quoi remplacer ? », mais aussi « comment migrer, en combien de temps, avec quels compromis ? ».
+  <p>
+    <a href="https://desarrimage.prigent.tech">
+      <img src="https://img.shields.io/website?down_color=critical&down_message=hors%20ligne&label=production&style=flat-square&up_color=brightgreen&up_message=en%20ligne&url=https%3A%2F%2Fdesarrimage.prigent.tech" alt="Production en ligne" />
+    </a>
+    <a href="https://github.com/superT0f/desarrimage/actions/workflows/ci.yml">
+      <img src="https://github.com/superT0f/desarrimage/actions/workflows/ci.yml/badge.svg" alt="CI" />
+    </a>
+    <a href="CHANGELOG.md">
+      <img src="https://img.shields.io/github/package-json/v/superT0f/desarrimage?filename=client%2Fpackage.json&style=flat-square&label=version" alt="Version SemVer" />
+    </a>
+    <a href="LICENSE">
+      <img src="https://img.shields.io/badge/code-AGPL--3.0-blue?style=flat-square" alt="Licence AGPL 3.0 ou ultérieure" />
+    </a>
+    <a href="data/LICENSE">
+      <img src="https://img.shields.io/badge/données-CC%20BY--SA%204.0-green?style=flat-square" alt="Données CC BY-SA 4.0" />
+    </a>
+  </p>
+  <p>
+    <img src="https://img.shields.io/badge/PHP-8.4-777bb3?style=flat-square&logo=php&logoColor=white" alt="PHP 8.4" />
+    <img src="https://img.shields.io/badge/Vue-3-42b883?style=flat-square&logo=vuedotjs&logoColor=white" alt="Vue 3" />
+    <img src="https://img.shields.io/badge/Vite-5-646cff?style=flat-square&logo=vite&logoColor=white" alt="Vite 5" />
+    <img src="https://img.shields.io/badge/MariaDB-10.11-003545?style=flat-square&logo=mariadb&logoColor=white" alt="MariaDB 10.11" />
+    <img src="https://img.shields.io/badge/Docker-Compose-2496ed?style=flat-square&logo=docker&logoColor=white" alt="Docker Compose" />
+  </p>
+</div>
 
-## Structure
+---
 
-- `api/` — API PHP 8, Slim 4 et MySQL, migrations Phinx.
-- `client/` — interface Vue 3, Vite, Pinia, Vue Router et Axios.
-- `data/catalog.json` — catalogue contributif et modes opératoires, versionnés dans Git.
-- `client/public/images/` — logo et illustrations SVG libres de droits.
+## 🧭 Pourquoi ce projet ?
 
-## Démarrage local
+Les annuaires répondent à **« par quoi remplacer cet outil ? »**.
 
-Prérequis : PHP 8.2+, Composer, MySQL 8+, Node.js 20+.
+Désarrimage s’attaque à la question suivante, celle qui fait généralement remettre la migration à plus tard :
+
+> **« Très bien… mais je fais comment, concrètement ? »**
+
+Chaque fiche propose :
+
+- 🌍 des alternatives françaises et européennes, avec leur pays, leur licence et leur modèle économique ;
+- ⚖️ les avantages **et** les inconvénients, sans enjolivement commercial ;
+- 🗺️ un mode opératoire ordonné : inventaire, export, test, bascule et retour arrière ;
+- ⏱️ une estimation du temps et de la difficulté ;
+- 🔗 des sources officielles pour vérifier les informations.
+
+Le projet est indépendant, sans publicité et sans classement sponsorisé. Moins de dépendance, plus de documentation. ⚓
+
+## ✨ Dans la besace de la v0.1
+
+- **20 produits** documentés ;
+- **14 alternatives** françaises ou européennes ;
+- **14 migrations** détaillées, soit **56 étapes** actionnables ;
+- Gmail, Slack, Google Drive, Notion, Trello et Zoom parmi les premiers outils à quitter ;
+- une API publique en lecture seule ;
+- une home qui reste utilisable grâce à un instantané du catalogue si l’API fait une sieste.
+
+## 🐳 Démarrer avec Docker — la voie royale
+
+Prérequis : **Docker avec Compose v2**, ou **Podman**. Aucun PHP, Node.js ou MySQL à installer sur ta machine.
+
+```bash
+git clone git@github.com:superT0f/desarrimage.git
+cd desarrimage
+make dev
+```
+
+Au premier lancement, les images sont téléchargées et construites. Ensuite :
+
+1. MariaDB démarre avec un volume persistant ;
+2. l’API attend la base, applique les migrations Phinx et importe le catalogue ;
+3. Vite démarre avec le hot-reload et transmet `/api` à PHP.
+
+Une fois les conteneurs prêts :
+
+| Service | Adresse |
+| --- | --- |
+| 🖥️ Application | http://localhost:5173 |
+| ⚙️ API — santé | http://localhost:8080/api/health |
+| 🗺️ Exemple de fiche | http://localhost:5173/produit/google-drive |
+| 🗄️ MariaDB | `127.0.0.1:3307` |
+
+Les identifiants de développement sont `desarrimage` / `desarrimage-dev`. Ils sont jetables, locaux et **ne doivent jamais servir en production**.
+
+> [!TIP]
+> `Ctrl+C` arrête la stack. Les sources restent montées dans les conteneurs : modifie un fichier, recharge, c’est tout. Le fameux « ça marche sur ma machine » est cordialement invité à prendre le large.
+
+### 🦭 Podman, tu es le bienvenu
+
+Le `Makefile` détecte automatiquement **Docker Compose**, `podman-compose` ou `podman compose`.
+
+Si Podman est présent sans provider Compose :
+
+```bash
+make compose-bootstrap
+make dev
+```
+
+`compose-bootstrap` installe `podman-compose` dans `.tmp/`, ignoré par Git. Rien n’est installé globalement et aucun `sudo` n’est nécessaire. Tu peux aussi forcer le moteur :
+
+```bash
+make dev COMPOSE="docker compose"
+# ou
+make dev COMPOSE="podman compose"
+```
+
+### ⚓ Commandes de bord
+
+| Commande | Effet |
+| --- | --- |
+| `make dev` | Construit et démarre toute la stack au premier plan |
+| `make dev-detached` | Démarre la stack en arrière-plan |
+| `make dev-ps` | Affiche les conteneurs et leur état |
+| `make dev-logs` | Suit les logs front, API et base |
+| `make dev-down` | Arrête les conteneurs en conservant les volumes |
+| `make docker-check` | Valide la configuration Compose |
+| `make check` | Lint PHP, validation Composer/JSON et build Vite |
+
+## 🧱 Stack et architecture
+
+```text
+desarrimage/
+├── 🐳 Dockerfile                 # Targets `api` et `client`
+├── 🐳 compose.yaml               # Vue + PHP/Apache + MariaDB
+├── ⚙️ api/
+│   ├── public/                   # Front controller Slim 4
+│   ├── src/                      # PDO, configuration et repository
+│   ├── db/migrations/            # Schéma versionné avec Phinx
+│   └── scripts/                  # Seed, instantané et entrypoint Docker
+├── 🖥️ client/
+│   ├── public/                   # SVG et instantané du catalogue
+│   └── src/                      # Vue 3, Pinia, Router, Axios et Vite
+├── 🗺️ data/catalog.json          # Le vrai trésor : les fiches contributives
+└── 🚀 Makefile                   # Dev, qualité et déploiement Gandi
+```
+
+- **Back** : PHP 8.4, Slim 4, PDO, Phinx, MariaDB/MySQL ;
+- **Front** : Vue 3, Vite 5, Pinia, Vue Router, Axios ;
+- **Infra** : Docker Compose pour le développement, Apache + MySQL chez Gandi pour la production ;
+- **Données** : JSON lisible et versionné, importé en base avec un seed idempotent.
+
+## 🛠️ Développement sans Docker
+
+Tu préfères naviguer à la rame ? Il faut PHP 8.2+, Composer, Node.js 20+ et MySQL/MariaDB.
 
 ```bash
 make install
-# Créer la base MySQL indiquée dans api/.env, puis :
+# Crée la base et renseigne api/.env, puis :
 make db-migrate
 make db-seed
 make dev-api
@@ -31,34 +163,89 @@ Dans un second terminal :
 make dev-client
 ```
 
-Le front est disponible sur `http://localhost:5173` et transmet `/api` au serveur PHP local.
+Le front répond sur `http://localhost:5173` et l’API sur `http://localhost:8080`.
 
-## Production Gandi
+## 🔌 API publique
+
+| Route | Description |
+| --- | --- |
+| `GET /api/health` | Vérifie l’API et sa connexion à la base |
+| `GET /api/stats` | Compte les produits, alternatives et migrations |
+| `GET /api/categories` | Liste les catégories |
+| `GET /api/products` | Liste et filtre les produits |
+| `GET /api/products/{slug}` | Retourne une fiche et ses modes opératoires |
+
+Filtres disponibles : `search`, `category` et `region` (`fr`, `europe`, `other`).
+
+```bash
+curl 'http://localhost:8080/api/products?region=fr'
+curl 'http://localhost:8080/api/products?search=nextcloud'
+curl 'http://localhost:8080/api/products/google-drive'
+```
+
+## 🚀 Déploiement Gandi
 
 Le vhost attendu est `/mnt/gandi/vhosts/desarrimage.prigent.tech/htdocs`.
 
-1. Copier `htdocs/api/.env.example` en `htdocs/api/.env` et renseigner les accès MySQL `DESARRIMAGE_DB_*`.
-2. Exécuter `make deploy` pour déployer le front seul. La home utilise alors l’instantané du catalogue, sans base.
-3. Exécuter `make push` pour déployer aussi l’API et ses dépendances Composer.
-4. Sur le serveur Gandi, exécuter `vendor/bin/phinx migrate` puis `php scripts/seed.php` depuis `api/` pour initialiser la base.
-5. Vérifier avec `make verify` et `make verify-api`.
+```bash
+make deploy       # Front uniquement
+make push         # API + données + front
+make deploy-dry   # Simulation sans écrire sur le vhost
+make status       # Différences avec la production
+make verify       # Home et assets publics
+make verify-api   # Sonde MySQL de production
+```
 
-Les déploiements préservent toujours le `.env` de production. `make deploy-dry` et `make status` permettent de contrôler les différences avant et après envoi. L’API ne nécessite aucune clé pour la consultation publique.
+Pour initialiser la production, copie `htdocs/api/.env.example` en `htdocs/api/.env`, renseigne les variables `DESARRIMAGE_DB_*`, puis exécute les migrations et le seed **sur le serveur Gandi**. Les déploiements préservent toujours le `.env` et le répertoire `data/`.
 
-## Contribuer
+## 🏷️ Versions et changelog
 
-Les fiches sont modifiées dans `data/catalog.json` via une pull request. Chaque alternative doit indiquer son pays d’origine, son modèle économique et ses sources. Un mode opératoire doit être testé, daté et préciser les limites ou pertes éventuelles.
+Le projet utilise **[Semantic Versioning](https://semver.org/lang/fr/)** : `MAJEUR.MINEUR.CORRECTIF`. Pendant la phase `0.x`, l’API et le modèle de données peuvent encore bouger ; les versions `1.x` seront stabilisées.
 
-Consultez le guide de contribution pour le format attendu.
+La référence est le fichier `.version`, synchronisé avec `client/package.json` et `client/package-lock.json`. La version est injectée dans le build Vite et affichée dans le footer.
 
-## Licences
+```bash
+make version                    # Affiche la version actuelle
+make changelog                  # Régénère CHANGELOG.md depuis les commits
+make release VERSION=0.2.0      # Synchronise la version + changelog
+```
 
-- Code : **AGPL-3.0-or-later**, voir `LICENSE`.
-- Contenu du catalogue : **CC BY-SA 4.0**, voir `data/LICENSE`.
-- Logo et illustrations : **CC BY-SA 4.0**.
+Le [CHANGELOG.md](CHANGELOG.md) est généré automatiquement à partir des **Conventional Commits** : `feat`, `fix`, `docs`, `ci`, `chore`, etc. Chaque entrée pointe vers son commit et chaque version vers son tag GitHub.
 
-Le code peut être utilisé, modifié et partagé, y compris commercialement. Toute version modifiée distribuée ou proposée comme service réseau doit conserver ces libertés et offrir son code source correspondant sous la même licence. Les contenus adaptés doivent également rester sous CC BY-SA 4.0, avec attribution.
+```bash
+git commit -m "feat(api): ajouter le filtre par hébergeur"
+make release VERSION=0.2.0
+# Vérifie le diff, committe, puis :
+git tag -a v0.2.0 -m "Désarrimage 0.2.0"
+git push origin main v0.2.0
+```
 
-Copyright (c) 2026 Désarrimage contributors.
+Le changelog est mis à jour à la préparation de release, jamais avec des secrets ni des dépendances npm supplémentaires. Simple, lisible, automatique. 🤖
 
-Désarrimage est un projet indépendant. Les marques citées appartiennent à leurs propriétaires respectifs.
+## 🤝 Contribuer
+
+Tu as fait une migration et vécu pour raconter l’histoire ? Parfait.
+
+1. Ouvre `data/catalog.json` ;
+2. ajoute les produits et la migration ;
+3. documente les compromis et les sources ;
+4. vérifie le scénario avec `make check` et `make dev` ;
+5. ouvre une pull request.
+
+Le détail du format et des critères éditoriaux est dans [CONTRIBUTING.md](CONTRIBUTING.md). Les corrections de coquilles, d’accessibilité et de Dockerfile comptent aussi. Les petits rafistolages sont les bienvenus. 🛠️
+
+## 📜 Licences — ouvert, pas open-bar
+
+- **Code : [AGPL-3.0-or-later](LICENSE)** ;
+- **Catalogue : [CC BY-SA 4.0](data/LICENSE)** ;
+- **Logo et illustrations : CC BY-SA 4.0**.
+
+Tu peux utiliser, modifier et partager le code, y compris commercialement. Une version modifiée distribuée ou proposée comme service réseau doit conserver ces libertés et offrir son code source correspondant sous la même licence. Les adaptations des contenus restent en CC BY-SA 4.0, avec attribution.
+
+Copyright © 2026 — contributeurs Désarrimage. Les marques citées appartiennent à leurs propriétaires respectifs.
+
+---
+
+<div align="center">
+  <strong>Bon vent, et gardez un export de vos données. On n’est jamais trop prudent en mer. ⚓</strong>
+</div>

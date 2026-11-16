@@ -3,18 +3,30 @@
 VHOST_DIR := /mnt/gandi/vhosts/desarrimage.prigent.tech/htdocs
 PROD_URL := https://desarrimage.prigent.tech
 RSYNC_OPTS := -avz --no-owner --no-group --chmod=D755,F644
+COMPOSE ?= $(shell if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then printf 'docker compose'; elif command -v podman-compose >/dev/null 2>&1; then printf 'podman-compose'; elif [ -x .tmp/podman-compose/bin/podman-compose ]; then printf '.tmp/podman-compose/bin/podman-compose'; elif command -v podman >/dev/null 2>&1 && podman compose version >/dev/null 2>&1; then printf 'podman compose'; else printf 'docker compose'; fi)
+APP_VERSION := $(shell cat .version 2>/dev/null || printf '0.1.0')
+export APP_VERSION
+export VITE_APP_VERSION := $(APP_VERSION)
 
-.PHONY: help install dev dev-client dev-api check build clean mnt-gandi \
+.PHONY: help install dev dev-detached dev-down dev-logs dev-ps dev-client dev-api \
+	compose-bootstrap docker-check check build version changelog release clean mnt-gandi \
 	db-migrate db-seed snapshot deploy push-front push-api push deploy-dry status verify verify-api
 
 help:
 	@printf '%s\n' \
 		'Désarrimage — commandes du projet' \
 		'  make install       Installe les dépendances et prépare api/.env' \
-		'  make dev-client    Démarre Vue/Vite sur http://localhost:5173' \
-		'  make dev-api       Démarre PHP sur http://localhost:8080' \
+		'  make dev           Démarre front + API + MariaDB dans Docker' \
+		'  make dev-detached  Idem, en arrière-plan' \
+		'  make dev-logs      Suit les logs des conteneurs' \
+		'  make dev-down      Arrête les conteneurs (données conservées)' \
+		'  make dev-client    Démarre Vue/Vite hors Docker' \
+		'  make dev-api       Démarre PHP hors Docker' \
 		'  make check         Valide PHP, Composer, le catalogue et le build' \
 		'  make build         Génère l’instantané et construit le front' \
+		'  make version       Affiche la version SemVer du projet' \
+		'  make changelog     Régénère CHANGELOG.md depuis les commits' \
+		'  make release       Prépare une version : make release VERSION=0.2.0' \
 		'  make db-migrate    Applique les migrations avec api/.env' \
 		'  make db-seed       Importe le catalogue avec api/.env' \
 		'  make deploy        Déploie la landing et le front sur Gandi' \
@@ -36,16 +48,59 @@ dev-client:
 dev-api:
 	cd api && php -S localhost:8080 -t public
 
-dev: dev-client
+dev: docker-check
+	$(COMPOSE) up --build
+
+dev-detached: docker-check
+	$(COMPOSE) up --build -d
+	@echo 'Front : http://localhost:5173 — API : http://localhost:8080/api/health'
+
+dev-down:
+	$(COMPOSE) down
+
+dev-logs:
+	$(COMPOSE) logs -f
+
+dev-ps:
+	$(COMPOSE) ps
+
+compose-bootstrap:
+	@if $(COMPOSE) version >/dev/null 2>&1; then \
+		echo 'Compose est déjà disponible : $(COMPOSE)'; \
+	else \
+		command -v podman >/dev/null 2>&1 || (echo 'Installe Docker ou Podman pour continuer.' && exit 1); \
+		python3 -m venv .tmp/podman-compose; \
+		.tmp/podman-compose/bin/pip install --disable-pip-version-check podman-compose; \
+		echo 'podman-compose installé localement. Relance make dev.'; \
+	fi
+
+docker-check:
+	@$(COMPOSE) version >/dev/null 2>&1 || (echo 'Compose est absent. Installe Docker Compose ou lance make compose-bootstrap.' && exit 1)
+	@$(COMPOSE) config >/dev/null
 
 check:
 	cd api && composer validate --strict
-	find api/src api/public api/scripts api/db/migrations -name '*.php' -print0 | xargs -0 -n1 php -l
+	find api/src api/public api/scripts api/db/migrations scripts -name '*.php' -print0 | xargs -0 -n1 php -l
 	php -r "json_decode(file_get_contents('data/catalog.json'), true, 512, JSON_THROW_ON_ERROR); echo 'Catalogue JSON valide'.PHP_EOL;"
+	php scripts/check-version.php "$$(cat .version)"
 	$(MAKE) --no-print-directory build
 
 snapshot:
 	php api/scripts/export-snapshot.php
+
+version:
+	@printf '%s\n' "$(APP_VERSION)"
+
+changelog:
+	php scripts/generate-changelog.php
+
+release:
+	@test -n "$(VERSION)" || (echo 'Usage : make release VERSION=0.2.0' && exit 1)
+	php scripts/check-version.php "$(VERSION)" --validate-only
+	printf '%s\n' "$(VERSION)" > .version
+	cd client && npm version "$(VERSION)" --no-git-tag-version --ignore-scripts
+	$(MAKE) --no-print-directory changelog
+	@echo 'Version préparée. Vérifie, committe, puis crée le tag v$(VERSION).'
 
 build: snapshot
 	cd client && npm run build

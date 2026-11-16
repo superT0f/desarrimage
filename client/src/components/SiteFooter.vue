@@ -1,3 +1,7 @@
+<script setup>
+const appVersion = __APP_VERSION__
+</script>
+
 <template>
   <footer class="site-footer">
     <div class="container footer-grid">
@@ -18,7 +22,7 @@
     </div>
     <div class="container footer-bottom">
       <span>Fait en France, avec des liens plutôt que des chaînes.</span>
-      <span>v0.1 — en construction</span>
+      <span>v{{ appVersion }} — en construction</span>
     </div>
   </footer>
 </template>

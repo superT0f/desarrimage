@@ -20,6 +20,12 @@ Merci de contribuer à des migrations numériques plus simples et documentées.
 - Les allégations doivent être sourcées, les tarifs datés et les avis distingués des faits.
 - Pas de liens d’affiliation sans déclaration explicite.
 
+## Commits et releases
+
+Utilisez les [Conventional Commits](https://www.conventionalcommits.org/fr/v1.0.0/) : `feat: ...`, `fix(api): ...`, `docs: ...`, `ci: ...`. Ils alimentent automatiquement `CHANGELOG.md` avec `make changelog`.
+
+Les versions suivent SemVer. `make release VERSION=x.y.z` synchronise les fichiers de version et régénère le changelog avant la revue et le tag.
+
 ## Revue
 
 Ouvrez une pull request en décrivant le scénario testé, sa date et son environnement. Les mainteneurs peuvent demander des sources complémentaires ou une reformulation.

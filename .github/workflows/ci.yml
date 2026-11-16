@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, pdo_mysql
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+      - name: Dépendances PHP
+        working-directory: api
+        run: composer install --no-interaction --prefer-dist
+      - name: Dépendances front
+        working-directory: client
+        run: npm ci --no-audit --no-fund
+      - name: Contrôles et build
+        run: make check
+      - name: Configuration Compose
+        run: docker compose config --quiet
+      - name: Images Docker
+        run: |
+          docker build --target api -t desarrimage-api:ci .
+          docker build --target client -t desarrimage-client:ci .
+
+  docker-smoke:
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Démarrer la stack
+        run: docker compose up --build -d
+      - name: Vérifier la stack
+        run: |
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:8080/api/stats > /tmp/desarrimage-stats.json; then
+              break
+            fi
+            sleep 5
+          done
+          curl --fail --silent http://127.0.0.1:8080/api/stats | tee /tmp/desarrimage-stats.json
+          grep -q '"migrations":14' /tmp/desarrimage-stats.json
+          curl --fail --silent http://127.0.0.1:5173/ | grep -q 'Désarrimage'
+      - name: Logs en cas d’échec
+        if: failure()
+        run: docker compose logs --tail=100
+      - name: Arrêter la stack
+        if: always()
+        run: docker compose down
