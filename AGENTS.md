@@ -62,6 +62,8 @@ make dev-down
 
 `make dev` choisit Docker Compose en priorité, puis Podman. Si nécessaire, `make compose-bootstrap` installe `podman-compose` dans `.tmp/`, sans `sudo` ni installation globale.
 
+Environnement Podman réellement validé le 16 novembre 2026 : **Podman 4.9.3 + podman-compose 1.6.0**. Mettre à jour cette référence après tout nouveau test de version.
+
 L’entrypoint API attend MariaDB, applique les migrations et lance le seed à chaque démarrage. Les sources sont montées avec hot-reload. Ne pas supprimer les volumes sans demande explicite.
 
 Le développement hors Docker reste disponible avec `make install`, `make db-migrate`, `make db-seed`, `make dev-api` et `make dev-client`.
@@ -149,4 +151,4 @@ Après une modification d’architecture, de commande, de licence, de versionnem
 - `AGENTS.md` pour les futurs agents ;
 - les badges uniquement s’ils représentent un état réel.
 
-Swagger UI est copié par `client/scripts/sync-api-docs.mjs` dans `client/public/swagger-assets/`, répertoire généré et ignoré par Git. L’interface est `/swagger.html` et la spécification `/api/openapi.yaml` ; ne pas utiliser de chemin public commençant par `/api/` pour ces assets, car le proxy Vite les transmettrait à PHP.
+Swagger UI est copié par `client/scripts/sync-api-docs.mjs` dans `client/public/swagger-assets/`, répertoire généré et ignoré par Git. L’interface est `/swagger.html` et la spécification `/api/openapi.yaml` ; ne pas utiliser de chemin public commençant par `/api/` pour ces assets, car le proxy Vite les transmettrait à PHP. `client/spec/` est ignoré par Git : Podman peut y créer un fichier vide lors du montage de la spécification dans le conteneur.

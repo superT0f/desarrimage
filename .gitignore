@@ -9,6 +9,7 @@ api/.env
 client/dist/
 client/public/swagger-assets/
 client/public/openapi.yaml
+client/spec/
 .phpunit.cache/
 .php-cs-fixer.cache
 .DS_Store

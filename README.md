@@ -113,6 +113,9 @@ Les identifiants de développement sont `desarrimage` / `desarrimage-dev`. Ils s
 
 Le `Makefile` détecte automatiquement **Docker Compose**, `podman-compose` ou `podman compose`.
 
+> [!NOTE]
+> **Environnement réellement testé le 16 novembre 2026 : Podman 4.9.3 + podman-compose 1.6.0.** Build des images Node 22, PHP 8.4 et MariaDB 10.11, migrations, seed, Swagger et appels API vérifiés. Les autres versions restent compatibles en principe, mais pas encore validées une par une.
+
 Si Podman est présent sans provider Compose :
 
 ```bash
