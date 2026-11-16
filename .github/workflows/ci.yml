@@ -55,6 +55,11 @@ jobs:
           curl --fail --silent http://127.0.0.1:8080/api/stats | tee /tmp/desarrimage-stats.json
           grep -q '"migrations":14' /tmp/desarrimage-stats.json
           curl --fail --silent http://127.0.0.1:5173/ | grep -q 'Désarrimage'
+      - name: Audits Lighthouse des deux thèmes
+        run: |
+          npx --yes lighthouse 'http://127.0.0.1:5173/?theme=light' --only-categories=accessibility,best-practices,seo --output=json --output-path=.tmp/lighthouse-light.json --quiet --chrome-flags='--headless --no-sandbox --disable-gpu'
+          npx --yes lighthouse 'http://127.0.0.1:5173/?theme=dark' --only-categories=accessibility,best-practices,seo --output=json --output-path=.tmp/lighthouse-dark.json --quiet --chrome-flags='--headless --no-sandbox --disable-gpu'
+          node scripts/lighthouse-summary.mjs .tmp/lighthouse-light.json .tmp/lighthouse-dark.json
       - name: Logs en cas d’échec
         if: failure()
         run: docker compose logs --tail=100

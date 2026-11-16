@@ -10,6 +10,16 @@ const featured = computed(() => catalog.products.filter((product) => Number(prod
 </script>
 
 <template>
+  <aside class="release-announcement" aria-label="Annonce de la version 0.4.2">
+    <div class="container release-announcement-inner">
+      <span class="release-badge">Nouveau · 0.4.2</span>
+      <p><strong>La réponse à la grande question.</strong> Google Drive → 3 alternatives : coûts, risques et API publique.</p>
+      <div class="release-links">
+        <RouterLink to="/produit/google-drive">Découvrir le guide <span>→</span></RouterLink>
+        <a href="https://github.com/superT0f/desarrimage/blob/main/docs/releases/0.4.2-marketing.md" target="_blank" rel="noopener">Notes de release ↗</a>
+      </div>
+    </div>
+  </aside>
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-copy">
@@ -27,6 +37,13 @@ const featured = computed(() => catalog.products.filter((product) => Number(prod
           <div class="avatar-stack" aria-hidden="true"><span>FR</span><span>UE</span><span>↗</span></div>
           <p><strong>Un projet ouvert et indépendant.</strong><br />Sans publicité. Sans classement sponsorisé.</p>
         </div>
+        <ul class="hero-values" aria-label="Engagements du projet">
+          <li>AGPL-3.0</li>
+          <li>CC BY-SA 4.0</li>
+          <li>API ouverte</li>
+          <li title="Audit Lighthouse 13.6.0 sur les thèmes clair et sombre">Lighthouse 100/100</li>
+          <li title="Validateur HTML du W3C">HTML vérifié W3C</li>
+        </ul>
       </div>
       <div class="hero-visual">
         <img src="/images/migration-harbour.svg" alt="Un plan de migration guide des conteneurs de données d’un service extra-européen vers des alternatives européennes." width="680" height="620" />
@@ -113,7 +130,7 @@ const featured = computed(() => catalog.products.filter((product) => Number(prod
         </div>
         <RouterLink class="text-link" to="/catalogue">Explorer tout le catalogue <span>→</span></RouterLink>
       </div>
-      <div v-if="catalog.error" class="notice error-notice">
+      <div v-if="catalog.error" class="notice error-notice" role="alert">
         {{ catalog.error }} Lancez l’API locale pour charger le catalogue.
       </div>
       <div v-else-if="catalog.loading" class="loading-grid"><span></span><span></span><span></span></div>

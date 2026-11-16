@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
+import ThemeToggle from './ThemeToggle.vue'
 
 const menuOpen = ref(false)
 const route = useRoute()
@@ -11,18 +12,22 @@ watch(() => route.fullPath, () => { menuOpen.value = false })
   <header class="site-header">
     <div class="container header-inner">
       <RouterLink to="/" class="brand" aria-label="Désarrimage, accueil">
-        <img src="/images/logo.svg" alt="Désarrimage" width="206" height="46" />
+        <img class="logo-light-theme" src="/images/logo.svg" alt="Désarrimage" width="206" height="46" />
+        <img class="logo-dark-theme" src="/images/logo-light.svg" alt="Désarrimage" width="206" height="46" />
       </RouterLink>
-      <button
-        class="menu-toggle"
-        type="button"
-        :aria-expanded="menuOpen"
-        aria-controls="navigation-principale"
-        aria-label="Ouvrir le menu"
-        @click="menuOpen = !menuOpen"
-      >
+      <div class="header-actions">
+        <ThemeToggle />
+        <button
+          class="menu-toggle"
+          type="button"
+          :aria-expanded="menuOpen"
+          aria-controls="navigation-principale"
+          :aria-label="menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'"
+          @click="menuOpen = !menuOpen"
+        >
         <span></span><span></span>
-      </button>
+        </button>
+      </div>
       <nav id="navigation-principale" :class="['main-nav', { open: menuOpen }]" aria-label="Navigation principale">
         <RouterLink to="/catalogue">Explorer</RouterLink>
         <a href="/swagger.html">API</a>

@@ -63,7 +63,7 @@ const targetSources = (slug) => props.guide.sources.filter((source) => source.ta
       </div>
       <div class="decision-grid">
         <article v-for="decision in guide.decisions" :key="decision.target.slug" class="decision-card">
-          <span class="product-monogram" :class="decision.target.region">{{ decision.target.name.charAt(0) }}</span>
+          <span class="product-monogram" :class="decision.target.region" aria-hidden="true">{{ decision.target.name.charAt(0) }}</span>
           <h3>{{ decision.target.name }}</h3>
           <p>{{ decision.recommendation }}</p>
         </article>
@@ -272,7 +272,7 @@ const targetSources = (slug) => props.guide.sources.filter((source) => source.ta
 .timeline-label strong { font-size: .76rem; }
 .timeline-label small { color: var(--muted); font-size: .6rem; line-height: 1.5; }
 .timeline-track { position: relative; height: 32px; background: var(--sand); }
-.timeline-phase { position: absolute; top: 0; bottom: 0; display: grid; place-items: center; min-width: 38px; background: var(--sea); color: var(--white); font-size: .58rem; font-weight: 750; }
+.timeline-phase { position: absolute; top: 0; bottom: 0; display: grid; place-items: center; min-width: 38px; background: var(--sea-strong); color: var(--white); font-size: .58rem; font-weight: 750; }
 .timeline-row:nth-child(odd) .timeline-phase { background: var(--coral); color: var(--ink); }
 .risk-list { display: grid; gap: 12px; }
 .risk-card { display: grid; grid-template-columns: 80px 1fr 170px; gap: 24px; align-items: center; padding: 23px; border: 1px solid var(--line); }

@@ -75,6 +75,8 @@ Toujours lancer :
 ```bash
 make check
 make docker-check
+# Pour une modification visuelle, avec la stack démarrée :
+make audit
 ```
 
 `make check` valide Composer, la syntaxe PHP, le catalogue JSON, la synchronisation SemVer et le build Vite. Après un changement Docker ou d’API, démarrer la stack et tester de vrais appels HTTP, pas seulement les imports ou la compilation.
@@ -107,6 +109,8 @@ Les modifications éditoriales se font dans `data/catalog.json` et `data/guides/
 - PHP avec `declare(strict_types=1)` et requêtes PDO préparées.
 - JavaScript Vue en Composition API, sans introduire TypeScript ou un framework CSS sans discussion.
 - Pas de polices, images ou scripts tiers ajoutés inutilement : le projet doit rester sobre et cohérent avec son sujet.
+- Le thème utilise `data-theme` et des variables CSS sémantiques (`--text`, `--paper`, `--surface`, `--sand`, `--sea-strong`). Ne pas réintroduire de couleurs en dur sans vérifier les deux thèmes.
+- Préserver la navigation clavier des onglets, les contrastes, les libellés ARIA et le rapport `make audit` à 100/100.
 - Pas de nouvelle dépendance sans vérifier qu’elle est nécessaire et compatible avec les versions existantes.
 - Pas de back-office ou d’authentification dans la v0.1 : l’API publique reste en lecture seule.
 - Dans l’environnement du mainteneur, préfixer les commandes shell avec `rtk` comme demandé par le `AGENTS.md` parent.

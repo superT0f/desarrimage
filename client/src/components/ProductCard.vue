@@ -9,7 +9,7 @@ defineProps({
 <template>
   <RouterLink class="product-card" :to="`/produit/${product.slug}`">
     <div class="product-card-top">
-      <span class="product-monogram" :class="product.region">{{ product.name.charAt(0) }}</span>
+      <span class="product-monogram" :class="product.region" aria-hidden="true">{{ product.name.charAt(0) }}</span>
       <span :class="['origin-badge', product.region]">
         {{ product.region === 'other' ? 'À remplacer' : product.country_code }}
       </span>

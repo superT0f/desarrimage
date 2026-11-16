@@ -9,7 +9,7 @@ export APP_VERSION
 export VITE_APP_VERSION := $(APP_VERSION)
 
 .PHONY: help install dev dev-detached dev-down dev-logs dev-ps dev-client dev-api \
-	compose-bootstrap docker-check check build version changelog release clean mnt-gandi \
+	compose-bootstrap docker-check check audit build version changelog release clean mnt-gandi \
 	db-migrate db-seed snapshot deploy push-front push-api push deploy-dry status verify verify-api
 
 help:
@@ -23,6 +23,7 @@ help:
 		'  make dev-client    Démarre Vue/Vite hors Docker' \
 		'  make dev-api       Démarre PHP hors Docker' \
 		'  make check         Valide PHP, Composer, le catalogue et le build' \
+		'  make audit         Mesure Lighthouse sur les thèmes clair et sombre' \
 		'  make build         Génère l’instantané et construit le front' \
 		'  make version       Affiche la version SemVer du projet' \
 		'  make changelog     Régénère CHANGELOG.md depuis les commits' \
@@ -85,6 +86,12 @@ check:
 	php scripts/check-version.php "$$(cat .version)"
 	php scripts/check-guides.php
 	$(MAKE) --no-print-directory build
+
+audit:
+	mkdir -p .tmp
+	npx --yes lighthouse 'http://127.0.0.1:5173/?theme=light' --only-categories=accessibility,best-practices,seo --output=json --output-path=.tmp/lighthouse-light.json --quiet --chrome-flags='--headless --no-sandbox --disable-gpu'
+	npx --yes lighthouse 'http://127.0.0.1:5173/?theme=dark' --only-categories=accessibility,best-practices,seo --output=json --output-path=.tmp/lighthouse-dark.json --quiet --chrome-flags='--headless --no-sandbox --disable-gpu'
+	node scripts/lighthouse-summary.mjs .tmp/lighthouse-light.json .tmp/lighthouse-dark.json
 
 snapshot:
 	php api/scripts/export-snapshot.php

@@ -30,6 +30,10 @@ Les estimations doivent indiquer leur date, leurs hypothèses et leurs sources. 
 - Les allégations doivent être sourcées, les tarifs datés et les avis distingués des faits.
 - Pas de liens d’affiliation sans déclaration explicite.
 
+## Accessibilité et interface
+
+Toute modification visuelle doit rester lisible dans les thèmes clair et sombre. Vérifiez la navigation clavier, le focus, les libellés et `make audit`. Les trois scores Lighthouse — accessibilité, bonnes pratiques et SEO — doivent rester à 100/100.
+
 ## Commits et releases
 
 Utilisez les [Conventional Commits](https://www.conventionalcommits.org/fr/v1.0.0/) : `feat: ...`, `fix(api): ...`, `docs: ...`, `ci: ...`. Ils alimentent automatiquement `CHANGELOG.md` avec `make changelog`.

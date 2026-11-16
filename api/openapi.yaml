@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Désarrimage — API publique
-  version: 0.4.2
+  version: 0.5.0
   description: |
     API ouverte en lecture seule des alternatives numériques françaises et européennes et de leurs guides de migration.
 

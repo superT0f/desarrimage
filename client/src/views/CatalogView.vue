@@ -46,7 +46,7 @@ function reset() {
     </div>
   </section>
 
-  <section class="section catalog-section">
+  <section class="section catalog-section" :aria-busy="catalog.loading">
     <div class="container">
       <form class="catalog-search" role="search" @submit.prevent="updateQuery({ search })">
         <label class="sr-only" for="catalog-search">Rechercher un produit</label>
@@ -71,12 +71,12 @@ function reset() {
         </label>
       </div>
 
-      <div class="catalog-result-meta">
+      <div class="catalog-result-meta" aria-live="polite">
         <p><strong>{{ catalog.products.length }}</strong> résultat{{ catalog.products.length > 1 ? 's' : '' }}</p>
         <button v-if="Object.keys(route.query).length" class="clear-filter" @click="reset">Effacer les filtres ×</button>
       </div>
 
-      <div v-if="catalog.error" class="notice error-notice">
+      <div v-if="catalog.error" class="notice error-notice" role="alert">
         <strong>Le catalogue n’a pas répondu.</strong> {{ catalog.error }}
       </div>
       <div v-else-if="catalog.loading" class="loading-grid"><span></span><span></span><span></span></div>

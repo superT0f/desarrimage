@@ -143,6 +143,29 @@ make dev COMPOSE="podman compose"
 | `make docker-check` | Valide la configuration Compose |
 | `make check` | Lint PHP, validation Composer/JSON et build Vite |
 
+## 🌓 Thème et accessibilité — mesurés, pas promis
+
+La vitrine propose un **thème clair/sombre persistant**, initialisé selon la préférence système et modifiable dans le header. Les onglets de migration sont navigables au clavier, les contrastes ont été corrigés et les états de chargement/erreur sont annoncés aux technologies d’assistance.
+
+Audit réel du 16 novembre 2026 avec **Lighthouse 13.6.0**, sur chaque thème :
+
+- **Accessibilité : 100/100** ;
+- **Bonnes pratiques : 100/100** ;
+- **SEO : 100/100**.
+
+Le validateur HTML du W3C ne remonte aucune erreur. `robots.txt`, `sitemap.xml` et `llms.txt` sont servis par la vitrine pour faciliter l’exploration par les moteurs et agents.
+
+Pour reproduire l’audit après avoir lancé la stack :
+
+```bash
+make dev-detached
+make audit
+```
+
+La CI exécute également Lighthouse sur les deux thèmes et échoue si l’un de ces trois scores repasse sous 100.
+
+<img src="docs/images/release-0.5.0-dark.png" alt="Vitrine Désarrimage en thème sombre" />
+
 ## 🧱 Stack et architecture
 
 ```text

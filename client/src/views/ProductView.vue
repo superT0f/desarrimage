@@ -23,6 +23,21 @@ const difficultyLabels = {
   avancee: 'Navigation expérimentée',
 }
 
+function onTabKeydown(event) {
+  const keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End']
+  if (!keys.includes(event.key) || !product.value?.migrations?.length) return
+  event.preventDefault()
+  const migrations = product.value.migrations
+  const currentIndex = migrations.findIndex((migration) => migration.id === selectedId.value)
+  let nextIndex = currentIndex
+  if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + migrations.length) % migrations.length
+  if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % migrations.length
+  if (event.key === 'Home') nextIndex = 0
+  if (event.key === 'End') nextIndex = migrations.length - 1
+  selectedId.value = migrations[nextIndex].id
+  nextTick(() => document.getElementById(`tab-${selectedId.value}`)?.focus())
+}
+
 watch(
   () => route.params.slug,
   async (slug) => {
@@ -68,7 +83,7 @@ watch(
         <div class="product-hero-grid">
           <div>
             <div class="product-title-line">
-              <span class="product-monogram large" :class="product.region">{{ product.name.charAt(0) }}</span>
+              <span class="product-monogram large" :class="product.region" aria-hidden="true">{{ product.name.charAt(0) }}</span>
               <div><p class="product-category">{{ product.category_name }}</p><h1>{{ product.name }}</h1></div>
             </div>
             <p class="product-lead">{{ product.description }}</p>
@@ -93,7 +108,7 @@ watch(
           <p class="eyebrow"><span></span> Vos destinations</p>
           <h2>Quel cap voulez-vous prendre ?</h2>
         </div>
-        <div class="destination-tabs" role="tablist" aria-label="Alternatives disponibles">
+        <div class="destination-tabs" role="tablist" aria-label="Alternatives disponibles" @keydown="onTabKeydown">
           <button
             v-for="migration in product.migrations"
             :id="`tab-${migration.id}`"
@@ -101,10 +116,11 @@ watch(
             role="tab"
             :aria-selected="selectedMigration.id === migration.id"
             :aria-controls="`panel-${migration.id}`"
+            :tabindex="selectedMigration.id === migration.id ? 0 : -1"
             :class="{ active: selectedMigration.id === migration.id }"
             @click="selectedId = migration.id"
           >
-            <span class="product-monogram" :class="migration.target.region">{{ migration.target.name.charAt(0) }}</span>
+            <span class="product-monogram" :class="migration.target.region" aria-hidden="true">{{ migration.target.name.charAt(0) }}</span>
             <span><strong>{{ migration.target.name }}</strong><small><CountryFlag :code="migration.target.country_code" :country-name="migration.target.country_name" />{{ migration.target.country_name }} · {{ migration.target.vendor }}</small></span>
             <i aria-hidden="true">→</i>
           </button>
