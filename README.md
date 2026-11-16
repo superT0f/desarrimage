@@ -151,9 +151,11 @@ Audit réel du 16 novembre 2026 avec **Lighthouse 13.6.0**, sur chaque thème :
 
 - **Accessibilité : 100/100** ;
 - **Bonnes pratiques : 100/100** ;
-- **SEO : 100/100**.
+- **SEO : 100/100** ;
+- **Performance en production : 99/100** ;
+- **Exploration agentique : 100/100**.
 
-Le validateur HTML du W3C ne remonte aucune erreur. `robots.txt`, `sitemap.xml` et `llms.txt` sont servis par la vitrine pour faciliter l’exploration par les moteurs et agents.
+Le validateur HTML du W3C ne remonte aucune erreur en production. `robots.txt`, `sitemap.xml` et `llms.txt` sont servis par la vitrine pour faciliter l’exploration par les moteurs et agents.
 
 Pour reproduire l’audit après avoir lancé la stack :
 
