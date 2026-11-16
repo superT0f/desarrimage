@@ -1,4 +1,5 @@
 # Dependencies
+node_modules/
 api/vendor/
 client/node_modules/
 
