@@ -62,7 +62,7 @@ foreach (array_filter(explode("\n", trim($log))) as $line) {
     }
 }
 
-$markdown = '## [' . $version . '](' . $repository . '/releases/tag/v' . $version . ') — ' . date('Y-m-d') . "\n\n";
+$markdown = '## [' . $version . '](' . $repository . '/tree/v' . $version . ') — ' . date('Y-m-d') . "\n\n";
 if ($breaking !== []) {
     $markdown .= "### 💥 Changements incompatibles\n\n" . implode("\n", $breaking) . "\n\n";
 }
