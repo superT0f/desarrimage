@@ -74,6 +74,7 @@ push-front: build mnt-gandi
 	rsync $(RSYNC_OPTS) --delete \
 		--exclude='assets/' \
 		--exclude='api/' \
+		--exclude='data/' \
 		--exclude='.env' \
 		--exclude='.htaccess' \
 		--exclude='index.html' \
@@ -89,12 +90,12 @@ push: push-api push-front
 
 deploy-dry: build mnt-gandi
 	rsync $(RSYNC_OPTS) --delete --dry-run \
-		--exclude='api/' --exclude='.env' --exclude='.htaccess' \
+		--exclude='api/' --exclude='data/' --exclude='.env' --exclude='.htaccess' \
 		client/dist/ "$(VHOST_DIR)/"
 
 status: mnt-gandi
 	rsync $(RSYNC_OPTS) --delete --dry-run \
-		--exclude='api/' --exclude='.env' --exclude='.htaccess' \
+		--exclude='api/' --exclude='data/' --exclude='.env' --exclude='.htaccess' \
 		client/dist/ "$(VHOST_DIR)/"
 
 verify:
