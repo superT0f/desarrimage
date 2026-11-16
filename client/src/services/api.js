@@ -13,7 +13,7 @@ http.interceptors.response.use(
   async (error) => {
     if (error.config) {
       try {
-        const path = error.config.url === '/products' ? '/products.json' : error.config.url
+        const path = ['/products', '/products/'].includes(error.config.url) ? '/products.json' : error.config.url
         const fallback = await mirror.get(path, { params: error.config.params })
         return fallback.data
       } catch {}
