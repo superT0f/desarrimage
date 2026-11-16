@@ -142,7 +142,7 @@ push-front: build mnt-gandi
 		--exclude='/api/' \
 		--exclude='/data/' \
 		--exclude='.env' \
-		--exclude='.htaccess' \
+		--exclude='/.htaccess' \
 		--exclude='/index.html' \
 		client/dist/ "$(VHOST_DIR)/"
 	rsync $(RSYNC_OPTS) .htaccess "$(VHOST_DIR)/.htaccess"
