@@ -21,7 +21,7 @@ const appVersion = __APP_VERSION__
       </div>
     </div>
     <div class="container footer-bottom">
-      <span>Fait en France, avec des liens plutôt que des chaînes.</span>
+      <span>Par SuperT0f avec Kimi K3.1 Pro assist — des liens plutôt que des chaînes.</span>
       <span>v{{ appVersion }} — en construction</span>
     </div>
   </footer>

@@ -29,6 +29,9 @@
     <img src="https://img.shields.io/badge/Vite-5-646cff?style=flat-square&logo=vite&logoColor=white" alt="Vite 5" />
     <img src="https://img.shields.io/badge/MariaDB-10.11-003545?style=flat-square&logo=mariadb&logoColor=white" alt="MariaDB 10.11" />
     <img src="https://img.shields.io/badge/Docker-Compose-2496ed?style=flat-square&logo=docker&logoColor=white" alt="Docker Compose" />
+    <a href="AGENTS.md">
+      <img src="https://img.shields.io/badge/assistance_IA-Kimi_K3.1_Pro-9146ff?style=flat-square" alt="Assistance IA Kimi K3.1 Pro" />
+    </a>
   </p>
 </div>
 
@@ -233,6 +236,21 @@ Tu as fait une migration et vécu pour raconter l’histoire ? Parfait.
 5. ouvre une pull request.
 
 Le détail du format et des critères éditoriaux est dans [CONTRIBUTING.md](CONTRIBUTING.md). Les corrections de coquilles, d’accessibilité et de Dockerfile comptent aussi. Les petits rafistolages sont les bienvenus. 🛠️
+
+## 🧑‍✈️🤖 Comment ce projet est fabriqué
+
+Désarrimage est construit en **pair-programming humain–IA**, et on le dit franchement :
+
+| Équipage | Contribution |
+| --- | --- |
+| **Christophe Prigent / SuperT0f** | Vision du projet, choix produit et éditoriaux, priorités, accès, arbitrages et validation finale |
+| **Kimi K3.1 Pro assist** | Exploration, architecture, code initial, visuels SVG, Docker, SemVer, documentation, tests et déploiements demandés |
+
+Le fonctionnement est itératif : comprendre le besoin, proposer, coder, exécuter les contrôles, montrer le résultat, corriger, puis committer. L’IA assiste le développement ; elle ne décide pas des orientations à la place du mainteneur.
+
+Cette transparence vaut aussi pour les tests : un build ou un appel API réussi ne signifie pas qu’une migration métier a été réellement effectuée. Les fiches non vérifiées portent `verified_at: null` et sont présentées comme des contenus d’amorçage.
+
+La référence pour les futures contributions humaines ou IA est [AGENTS.md](AGENTS.md) : architecture, commandes, secrets, éditorial, releases et définition honnête de ce qui est « testé ».
 
 ## 📜 Licences — ouvert, pas open-bar
 

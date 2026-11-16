@@ -2,6 +2,8 @@
 
 Merci de contribuer à des migrations numériques plus simples et documentées.
 
+Le projet est développé en pair-programming humain–IA par SuperT0f avec **Kimi K3.1 Pro assist**. Les choix restent validés par le mainteneur et les contrôles réellement exécutés sont distingués des simples propositions. Consultez [AGENTS.md](AGENTS.md) pour les conventions techniques et les règles de transparence.
+
 ## Ajouter un produit ou une migration
 
 1. Dupliquez une fiche existante dans `data/catalog.json`.
