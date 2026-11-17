@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://desarrimage.prigent.tech/sitemap.xml
