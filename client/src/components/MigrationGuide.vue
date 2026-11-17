@@ -23,6 +23,8 @@ const timelineStyle = (phase) => ({
 const riskLabels = { faible: 'Faible', modere: 'Modéré', eleve: 'Élevé' }
 const verificationLabels = { draft: 'Brouillon', documented: 'Documenté', tested: 'Testé sur le terrain', verified: 'Vérifié indépendamment' }
 const kindLabels = { documentation: 'Documentation', pricing: 'Tarifs', migration: 'Migration', security: 'Sécurité' }
+const sharedItemsLabel = computed(() => props.guide.source.slug === 'trello' ? 'tableaux Trello' : 'Drives partagés')
+const nativeItemsLabel = computed(() => props.guide.source.slug === 'trello' ? 'cartes avec pièce jointe' : 'de documents natifs')
 const commonSources = computed(() => props.guide.sources.filter((source) => !source.target))
 const targetSources = (slug) => props.guide.sources.filter((source) => source.target?.slug === slug)
 </script>
@@ -47,8 +49,8 @@ const targetSources = (slug) => props.guide.sources.filter((source) => source.ta
     <div class="scenario-grid" role="group" aria-label="Hypothèses du scénario">
       <div><strong>{{ guide.scenario.users }}</strong><span>utilisateurs</span></div>
       <div><strong>{{ guide.scenario.data_gb }} Go</strong><span>de données</span></div>
-      <div><strong>{{ guide.scenario.shared_drives }}</strong><span>Drives partagés</span></div>
-      <div><strong>{{ guide.scenario.native_documents_percentage }} %</strong><span>de documents natifs</span></div>
+      <div><strong>{{ guide.scenario.shared_drives }}</strong><span>{{ sharedItemsLabel }}</span></div>
+      <div><strong>{{ guide.scenario.native_documents_percentage }} %</strong><span>{{ nativeItemsLabel }}</span></div>
       <div><strong>J{{ guide.scenario.window_days }}</strong><span>fenêtre de bascule</span></div>
     </div>
 
@@ -187,7 +189,7 @@ const targetSources = (slug) => props.guide.sources.filter((source) => source.ta
       </div>
       <div class="source-groups">
         <div class="source-group">
-          <h3>Google Drive — départ</h3>
+          <h3>{{ guide.source.name }} — départ</h3>
           <a v-for="source in commonSources" :key="source.url" :href="source.url" target="_blank" rel="noopener">
             <span class="source-kind">{{ kindLabels[source.kind] }}</span><strong>{{ source.label }}</strong><i>↗</i>
           </a>

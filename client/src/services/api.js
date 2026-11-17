@@ -15,6 +15,9 @@ http.interceptors.response.use(
       try {
         const path = ['/products', '/products/'].includes(error.config.url) ? '/products.json' : error.config.url
         const fallback = await mirror.get(path, { params: error.config.params })
+        if (!fallback.data || typeof fallback.data !== 'object' || !('data' in fallback.data)) {
+          throw new Error('Réponse du miroir invalide')
+        }
         return fallback.data
       } catch {}
     }

@@ -75,7 +75,7 @@ Les guides ne restent plus seulement sur le site : chacun peut exporter un **Sha
 - **pré-rendu statique** avec OpenGraph, canonical et JSON-LD ;
 - niveaux de preuve `draft`, `documented`, `tested`, `verified`.
 
-Quatre guides complets sont disponibles : **Google Drive, Slack, Gmail et Notion**. Ils couvrent 3 hébergements, coûts natifs convertis en euros, limites d’import et risques de reconstruction.
+Cinq guides complets sont disponibles : **Google Drive, Slack, Gmail, Notion et Trello**. Ils couvrent les modèles d’hébergement, coûts en euros, limites d’import et risques de reconstruction. Trello compare l’importeur OAuth de Vikunja, le mapping Excel/API d’OpenProject et un import JSON-RPC à construire pour Kanboard.
 
 Le miroir statique `client/public/mirror/api/` permet de builder et pré-rendre sans MySQL ni réseau :
 
