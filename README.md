@@ -22,19 +22,20 @@ flowchart LR
   B -.-> A
 ```
 
-## 📣 Dernière release — 0.9.0
+## 📣 Dernière release — 0.10.0
 
-**Vite 8 à la barre, huit tests en vigie.** La chaîne front utilise maintenant Vite 8.3.8, Vitest et Oxlint. Les contrôles vérifient le catalogue, le repli JSON, le SEO et les composants avant chaque fusion.
+**La météo des données est arrivée.** La vitrine distingue désormais les informations relues, celles à revoir et celles sans date. Les preuves `documented`, `tested` et `verified` ne se confondent plus, et le miroir de secours s’affiche clairement quand l’API fait une sieste.
 
-- 🏷️ [Release 0.9.0 sur Framagit](https://framagit.org/SuperT0f/desarrimage/-/releases/v0.9.0)
-- 📣 [Annonce](https://framagit.org/SuperT0f/desarrimage/-/blob/main/docs/releases/0.9.0-marketing.md)
-- ⚙️ [Note technique](https://framagit.org/SuperT0f/desarrimage/-/blob/main/docs/releases/0.9.0-tech.md)
-- 🌍 [Voir l’annonce sur la vitrine](https://desarrimage.prigent.tech/)
+- 🏷️ [Release 0.10.0 sur Framagit](https://framagit.org/SuperT0f/desarrimage/-/releases/v0.10.0)
+- 📣 [Annonce](https://framagit.org/SuperT0f/desarrimage/-/blob/main/docs/releases/0.10.0-marketing.md)
+- ⚙️ [Note technique](https://framagit.org/SuperT0f/desarrimage/-/blob/main/docs/releases/0.10.0-tech.md)
+- 🧭 [Voir la fraîcheur du catalogue](https://desarrimage.prigent.tech/fraicheur)
 
 ## 🗃️ Résumé des releases
 
 | Version | Cap de la release | Liens |
 | --- | --- | --- |
+| **0.10.0** | Fraîcheur des données, preuves clarifiées, contributions guidées et 29 tests | [Release](https://framagit.org/SuperT0f/desarrimage/-/releases/v0.10.0) · [Note](https://framagit.org/SuperT0f/desarrimage/-/blob/main/docs/releases/0.10.0-marketing.md) |
 | **0.9.0** | Vite 8, premiers tests Vitest, Oxlint et couverture CI | [Release](https://framagit.org/SuperT0f/desarrimage/-/releases/v0.9.0) · [Note](https://framagit.org/SuperT0f/desarrimage/-/blob/main/docs/releases/0.9.0-marketing.md) |
 | **0.8.0** | Inventaire public, preuves de migration, backlog et KPI | [Release](https://framagit.org/SuperT0f/desarrimage/-/releases/v0.8.0) · [Note](https://framagit.org/SuperT0f/desarrimage/-/blob/main/docs/releases/0.8.0-marketing.md) |
 | **0.7.0** | Migration réelle vers Framagit et forges secondaires en relais | [Release](https://framagit.org/SuperT0f/desarrimage/-/releases/v0.7.0) · [Preuve](https://desarrimage.prigent.tech/produit/github) |
